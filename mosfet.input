@@ -1,0 +1,54 @@
+# Germanium MESFET test-1
+# created on 24 dec.2006, J.M.Sellier
+# modified on 07 sep.2007, J.M.Sellier
+
+TRANSPORT MC ELECTRONS
+
+FINALTIME 0.1e-12
+TIMESTEP 0.0015e-12
+
+XLENGTH 0.2e-6
+YLENGTH 16.0e-9
+
+XSPATIALSTEP 120
+YSPATIALSTEP 120
+
+# definition of the material (all the device is made of Germanium)
+MATERIAL X 0.0 0.2e-6    Y 0.0 16.0e-9  GERMANIUM
+
+# Phonons scattering
+ACOUSTICSCATTERING ON
+OPTICALSCATTERING ON
+
+CONDUCTIONBAND PARABOLIC
+
+# Definition of the doping concentration
+# ======================================
+DONORDENSITY    0.       0.         0.2e-6    16.0e-9   1.e23
+DONORDENSITY    0.       12.0e-9    0.034e-6    16.0e-9   3.e23
+DONORDENSITY    0.166e-6   12.0e-9    0.2e-6    16.0e-9   3.e23
+ACCEPTORDENSITY 0.       0.         0.2e-6    16.0e-9   1.e20
+
+# Definition of the various contacts
+# ==================================
+CONTACT DOWN  0.0    0.2e-6 INSULATOR 0.0
+CONTACT LEFT  0.0    16.0e-9 INSULATOR 0.0
+CONTACT RIGHT 0.0    16.0e-9 INSULATOR 0.0
+CONTACT UP    0.034e-6 0.068e-6 INSULATOR 0.0
+CONTACT UP    0.132e-6 0.166e-6 INSULATOR 0.0
+CONTACT UP    0.0    0.034e-6 OHMIC     0.0 3.e23
+CONTACT UP    0.068e-6 0.132e-6 SCHOTTKY  1.5
+CONTACT UP    0.166e-6 0.2e-6 OHMIC     0.8 3.e23
+
+NOQUANTUMEFFECTS
+MAXIMINI
+# SAVEEACHSTEP
+
+LATTICETEMPERATURE 300.
+
+STATISTICALWEIGHT 200
+MEDIA 3
+
+OUTPUTFORMAT GNUPLOT
+
+# end of MESFET test-1
