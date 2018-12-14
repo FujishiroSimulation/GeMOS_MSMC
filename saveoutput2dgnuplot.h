@@ -63,6 +63,7 @@ SaveOutput2DGNUPLOT(int je)
  FILE *lyp;
  FILE *ep;
  FILE *qp;
+ FILE *zp;
  FILE *fM;
  FILE *egl;
  FILE *egg;
@@ -96,6 +97,8 @@ SaveOutput2DGNUPLOT(int je)
    lyp=fopen(s,"w");
    sprintf(s,"quantum_potential00%d.xyz",je);
    qp=fopen(s,"w");
+   sprintf(s,"z_potential00%d.xyz",je);
+   zp=fopen(s,"w");
    sprintf(s,"energy_distribution_L00%d.xyz",je);
    egl=fopen(s,"w");
    sprintf(s,"energy_distribution_G00%d.xyz",je);
@@ -224,6 +227,13 @@ SaveOutput2DGNUPLOT(int je)
           1.e6*(i-1.)*dx,1.e6*(j-1.)*dy,u2d[i][j][0]);
       fprintf(qp,"\n");
   }
+
+// z-direction Effective Potential
+// ===========================
+  for(j=1;j<=ny+1;j++){
+    fprintf(zp,"%g %g\n",
+        1.e6*(j-1.)*dy,PSI[60][j]);
+  }
   
 // Energy distribution
 // ===========================
@@ -233,19 +243,19 @@ SaveOutput2DGNUPLOT(int je)
       temp = P[i][5]/dx;
       energy_L = pow(HBAR, 2)*(pow(P[i][1], 2) + pow(P[i][2], 2) + pow(P[i][3], 2)) / (2.*MSTAR[GERMANIUM][1][0] * M)/Q;
       fprintf(egl,"%g %g\n",
-          P[i][5], energy_L+u2d[int(temp)][37][4]/MEDIA*10);
+          P[i][5], energy_L-PSI[int(temp)][int(ny/2)]);
     }
     else if(P[i][0] == 2){
       temp = P[i][5]/dx;
       energy_G = pow(HBAR, 2)*(pow(P[i][1], 2) + pow(P[i][2], 2) + pow(P[i][3], 2)) / (2.*MSTAR[GERMANIUM][2][0] * M)/Q;
       fprintf(egg,"%g %g\n",
-          P[i][5], energy_G+u2d[int(temp)][37][4]/MEDIA*10+0.14194);
+          P[i][5], energy_G-PSI[int(temp)][int(ny/2)]+0.14194);
     }
     else{
       temp = P[i][5]/dx;
       energy_X = pow(HBAR, 2)*(pow(P[i][1], 2) + pow(P[i][2], 2) + pow(P[i][3], 2)) / (2.*MSTAR[GERMANIUM][3][0] * M)/Q;
       fprintf(egx,"%g %g\n",
-          P[i][5], energy_X+u2d[int(temp)][37][4]/MEDIA*10+0.14946);
+          P[i][5], energy_X-PSI[int(temp)][int(ny/2)]*10+0.14946);
     }
   }
 
@@ -296,9 +306,13 @@ SaveOutput2DGNUPLOT(int je)
    fclose(lyp);
    fclose(ep);
    fclose(qp);
+   fclose(zp);
    fclose(egl);
    fclose(egg);
    fclose(egx);
+   fclose(scl);
+   fclose(scg);
+   fclose(scx);
   }
 // Save the Hybrid MEP results
  if(Model_Number==MEPE || Model_Number==MEPEH){
