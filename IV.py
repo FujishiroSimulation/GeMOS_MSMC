@@ -31,9 +31,9 @@ for voltage in applied_voltages:
     CONTACT UP    0.0    0.034e-6 OHMIC     0.0 5.e22\n\
     CONTACT UP    0.068e-6 0.132e-6 SCHOTTKY  -1.0\n\
     CONTACT UP    0.166e-6 0.2e-6 OHMIC       "+str(voltage)+"  5.e22\n\
-    OXIDE   UP    0.068e-6 0.132-6 0.005e-6 0.3\n\
-    OXIDE   DOWN  0.0      0.2e-6  0.010e-6 0.3\n\
-    NOQUANTUMEFFECTS\n\
+    OXYDE   UP    0.068e-6 0.132-6 0.005e-6 0.3\n\
+    OXYDE   DOWN  0.0      0.2e-6  0.010e-6 0.3\n\
+    QEP_MODEL DENSITY_GRADIENT\n\
     MAXIMINI\n\
     LATTICETEMPERATURE 300.\n\
     STATISTICALWEIGHT 200\n\
