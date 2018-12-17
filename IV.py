@@ -40,7 +40,7 @@ for voltage in applied_voltages:
     MEDIA 3\n"
     f.write(script)
     f.close()
-    command="a.out script.input > output_"+str(voltage)+".txt"
+    command="./a.out script.input > output_"+str(voltage)+".txt"
     os.system(command)
 
 # remove the script
