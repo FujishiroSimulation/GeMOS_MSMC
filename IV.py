@@ -13,8 +13,8 @@ for voltage in applied_voltages:
     TIMESTEP 0.0015e-12\n\
     XLENGTH 0.2e-6\n\
     YLENGTH 16.0e-9\n\
-    XSPATIALSTEP 120n\
-    YSPATIALSTEP 120\n\
+    XSPATIALSTEP 120\n\
+    YSPATIALSTEP 160\n\
     ACOUSTICSCATTERING ON\n\
     OPTICALSCATTERING ON\n\
     MATERIAL X 0.0 0.2e-6    Y 0.0 16.0e-9  GERMANIUM\n\
