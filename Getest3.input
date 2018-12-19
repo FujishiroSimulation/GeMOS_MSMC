@@ -8,13 +8,13 @@ FINALTIME 15.0e-12
 TIMESTEP 0.0015e-12
 
 XLENGTH 0.2e-6
-YLENGTH 16.0e-9
+YLENGTH 3.0e-9
 
 XSPATIALSTEP 120
-YSPATIALSTEP 160
+YSPATIALSTEP 30
 
 # definition of the material (all the device is made of Germanium)
-MATERIAL X 0.0 0.2e-6    Y 0.0 16.0e-9  GERMANIUM
+MATERIAL X 0.0 0.2e-6    Y 0.0 3.0e-9  GERMANIUM
 
 # Phonons scattering
 ACOUSTICSCATTERING ON
@@ -24,16 +24,16 @@ CONDUCTIONBAND PARABOLIC
 
 # Definition of the doping concentration
 # ======================================
-DONORDENSITY    0.       0.         0.2e-6    16.0e-9   1.e22
-DONORDENSITY    0.       12.0e-9    0.034e-6    3.0e-9   5.e22
-DONORDENSITY    0.166e-6   12.0e-9    0.2e-6    3.0e-9   5.e22
-ACCEPTORDENSITY 0.       0.         0.2e-6    16.0e-9   1.e19
+DONORDENSITY    0.       0.         0.2e-6    3.0e-9   1.e22
+DONORDENSITY    0.       2.25e-9    0.034e-6    3.0e-9   5.e22
+DONORDENSITY    0.166e-6   2.25e-9    0.2e-6    3.0e-9   5.e22
+ACCEPTORDENSITY 0.       0.         0.2e-6    3.0e-9   1.e19
 
 # Definition of the various contacts
 # ==================================
 CONTACT DOWN  0.0      0.2e-6   INSULATOR 0.0
-CONTACT LEFT  0.0      16.0e-9  INSULATOR 0.0
-CONTACT RIGHT 0.0      16.0e-9  INSULATOR 0.0
+CONTACT LEFT  0.0      3.0e-9  INSULATOR 0.0
+CONTACT RIGHT 0.0      3.0e-9  INSULATOR 0.0
 CONTACT UP    0.034e-6 0.068e-6 INSULATOR 0.0
 CONTACT UP    0.132e-6 0.166e-6 INSULATOR 0.0
 CONTACT UP    0.0      0.034e-6 OHMIC     0.0 5.e22
