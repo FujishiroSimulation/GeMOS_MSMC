@@ -826,6 +826,11 @@ MCparameters(int Material)
             }
         }
     }
+    for(i=0;i<=4;i++){
+        for(j=0;j<=13;j++){
+            SC[i][j]=0;
+        }
+    }
     // End of Three-valleys materials
     // ############################
   }

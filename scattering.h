@@ -545,6 +545,7 @@ if(NOVALLEY[Material]==3){
          if(finalenergy<=0.) return;
 //         if(finalenergy>DIME*DE) finalenergy=BKTQ;
          j=1;
+         SC[1][1] += 1;
 // linea 20
        if(CONDUCTION_BAND==KANE) kf=SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
        if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
@@ -579,6 +580,7 @@ if(NOVALLEY[Material]==3){
 //         if(finalenergy<0.) return;
 //         if(finalenergy>DIME*DE) finalenergy=BKTQ;
          j=1;
+         SC[1][2] += 1;
 // linea 20
        if(CONDUCTION_BAND==KANE) kf=SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
        if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
@@ -614,6 +616,7 @@ if(NOVALLEY[Material]==3){
        finalenergy=superparticle_energy-HIV[0];
        if(finalenergy<=0.) return;
        j=1;
+       SC[1][3] += 1;
 // determination of the final states
        if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
        if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
@@ -630,6 +633,7 @@ if(NOVALLEY[Material]==3){
        finalenergy=superparticle_energy+HIV[0];
        if(finalenergy<=0.) return;
        j=1;
+       SC[1][4] += 1;
 // determination of the final states
        if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
        if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
@@ -647,6 +651,7 @@ if(NOVALLEY[Material]==3){
          if(finalenergy<=0.) return;
 //         if(finalenergy>DIME*DE) finalenergy=BKTQ;
          j=1;
+         SC[1][5] += 1;
 // determination of the final states
        if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
        if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
@@ -664,6 +669,7 @@ if(NOVALLEY[Material]==3){
          if(finalenergy<=0.) return;
 //         if(finalenergy>DIME*DE) finalenergy=BKTQ;
          j=1;
+         SC[1][6] += 1;
 // determination of the final states
        if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
        if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
@@ -682,6 +688,7 @@ if(NOVALLEY[Material]==3){
 //         if(finalenergy>DIME*DE) finalenergy=BKTQ;
          IV=2;
          j=1;
+         SC[1][7] += 1;
 // determination of the final states
        if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
        if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
@@ -700,6 +707,7 @@ if(NOVALLEY[Material]==3){
 //         if(finalenergy>DIME*DE) finalenergy=BKTQ;
          IV=2;
          j=1;
+         SC[1][8] += 1;
 // determination of the final states
        if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
        if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
@@ -718,6 +726,7 @@ if(NOVALLEY[Material]==3){
 //         if(finalenergy>DIME*DE) finalenergy=BKTQ;
          IV=3;
          j=1;
+         SC[1][9] += 1;
 // determination of the final states
        if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
        if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
@@ -736,6 +745,7 @@ if(NOVALLEY[Material]==3){
 //         if(finalenergy>DIME*DE) finalenergy=BKTQ;
          IV=3;
          j=1;
+         SC[1][10] += 1;
 // determination of the final states
        if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
        if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
@@ -753,6 +763,7 @@ if(NOVALLEY[Material]==3){
 //       if(finalenergy<0.) return;
        finalk=sqrt(ksquared);
        j=1;
+       SC[1][11] += 1;
 // determination of the final states
        if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
        if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
@@ -767,6 +778,7 @@ if(NOVALLEY[Material]==3){
 // Impurity scattering
     if((r1<=SWK[Material][1][12][ie]) && j==0){
      finalenergy=superparticle_energy;
+     SC[1][12] += 1;
 //     if(finalenergy<0.) return;
      r2=rnd();
      cb=1.-r2/(0.5+(1.-r2)*ksquared/QD2);
@@ -806,6 +818,7 @@ if(NOVALLEY[Material]==3){
 //         if(finalenergy>DIME*DE) finalenergy=BKTQ;
          IV=1;
          j=1;
+         SC[2][1] += 1;
 // determination of the final states
        if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
        if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
@@ -824,6 +837,7 @@ if(NOVALLEY[Material]==3){
 //         if(finalenergy>DIME*DE) finalenergy=BKTQ;
          IV=1;
          j=1;
+         SC[2][2] += 1;
 // determination of the final states
        if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
        if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
@@ -842,6 +856,7 @@ if(NOVALLEY[Material]==3){
 //         if(finalenergy>DIME*DE) finalenergy=BKTQ;
          IV=3;
          j=1;
+         SC[2][3] += 1;
 // determination of the final states
        if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
        if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
@@ -860,6 +875,7 @@ if(NOVALLEY[Material]==3){
 //         if(finalenergy>DIME*DE) finalenergy=BKTQ;
          IV=3;
          j=1;
+         SC[2][4] += 1;
 // determination of the final states
        if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
        if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
@@ -876,6 +892,7 @@ if(NOVALLEY[Material]==3){
        finalenergy=superparticle_energy;
        finalk=sqrt(ksquared);
        j=1;
+       SC[2][5] += 1;
 // determination of the final states
        if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
        if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
@@ -890,6 +907,7 @@ if(NOVALLEY[Material]==3){
 // Impurity scattering
     if((r1<=SWK[Material][2][6][ie]) && j==0){
      finalenergy=superparticle_energy;
+     SC[2][6] += 1;
      r2=rnd();
      cb=1.-r2/(0.5+(1.-r2)*ksquared/QD2);
      kf=ki;
@@ -928,6 +946,7 @@ if(NOVALLEY[Material]==3){
        if(finalenergy<=0.) return;
        IV=1;
        j=1;
+       SC[3][1] += 1;
 // determination of the final states
        if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
        if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
@@ -945,6 +964,7 @@ if(NOVALLEY[Material]==3){
        if(finalenergy<=0.) return;
        IV=1;
        j=1;
+       SC[3][2] += 1;
 // determination of the final states
        if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
        if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
@@ -962,6 +982,7 @@ if(NOVALLEY[Material]==3){
        if(finalenergy<=0.) return;
        IV=2;
        j=1;
+       SC[3][3] += 1;
 // determination of the final states
        if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
        if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
@@ -978,6 +999,7 @@ if(NOVALLEY[Material]==3){
        finalenergy=superparticle_energy+HIV[6]+EMIN[Material][3]-EMIN[Material][2];
        if(finalenergy<=0.) return;
        j=1;
+       SC[3][4] += 1;
 // determination of the final states
        if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
        if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
@@ -994,6 +1016,7 @@ if(NOVALLEY[Material]==3){
        finalenergy=superparticle_energy-HIV[4];
        if(finalenergy<=0.) return;
        j=1;
+       SC[3][5] += 1;
 // determination of the final states
        if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
        if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
@@ -1010,6 +1033,7 @@ if(NOVALLEY[Material]==3){
        finalenergy=superparticle_energy+HIV[4];
        if(finalenergy<=0.) return;
        j=1;
+       SC[3][6] += 1;
 // determination of the final states
        if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
        if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
@@ -1026,6 +1050,7 @@ if(NOVALLEY[Material]==3){
        finalenergy=superparticle_energy-HIV[5];
        if(finalenergy<=0.) return;
        j=1;
+       SC[3][7] += 1;
 // determination of the final states
        if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
        if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
@@ -1042,6 +1067,7 @@ if(NOVALLEY[Material]==3){
        finalenergy=superparticle_energy+HIV[5];
        if(finalenergy<=0.) return;
        j=1;
+       SC[3][8] += 1;
 // determination of the final states
        if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
        if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
@@ -1058,6 +1084,7 @@ if(NOVALLEY[Material]==3){
        finalenergy=superparticle_energy;
        finalk=sqrt(ksquared);
        j=1;
+       SC[3][9] += 1;
 // determination of the final states
        if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
        if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
@@ -1072,6 +1099,7 @@ if(NOVALLEY[Material]==3){
 // Impurity scattering
     if((r1<=SWK[Material][3][10][ie]) && j==0){
      finalenergy=superparticle_energy;
+     SC[3][10] += 1;
      r2=rnd();
      cb=1.-r2/(0.5+(1.-r2)*ksquared/QD2);
      kf=ki;
