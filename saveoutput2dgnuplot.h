@@ -74,6 +74,7 @@ SaveOutput2DGNUPLOT(int je)
  FILE *scl;
  FILE *scg;
  FILE *scx;
+ FILE *sc;
  register int i,j;
  real temp;
 
@@ -117,6 +118,8 @@ SaveOutput2DGNUPLOT(int je)
    scg=fopen(s,"w");
    sprintf(s,"scatterign_rate_X00%d.xyz",je);
    scx=fopen(s,"w");
+   sprintf(s,"scatterign_count00%d.xyz",je);
+   sc=fopen(s,"w");
  }
  else if(je>9 && je<=99){
    sprintf(s,"density0%d.xyz",je);
@@ -295,6 +298,14 @@ SaveOutput2DGNUPLOT(int je)
       DE*((real)(ie)),  SWK[2][3][1][ie], SWK[2][3][2][ie], SWK[2][3][3][ie], SWK[2][3][4][ie], SWK[2][3][5][ie], SWK[2][3][6][ie], SWK[2][3][7][ie], SWK[2][3][8][ie], SWK[2][3][9][ie], SWK[2][3][10][ie]);
   }
 
+// Scattering count
+  fprintf(sc, "ode E=%d, A=%d, L(1) E=%d, A=%d, L(2) E=%d, A=%d, G E=%d, A=%d, X E=%d, A=%d, Aco=%d, Imu=%d\n",
+    SC[1][1], SC[1][2], SC[1][3], SC[1][4], SC[1][5], SC[1][6], SC[1][7], SC[1][8], SC[1][9], SC[1][10], SC[1][11], SC[1][12]);
+  fprintf(sc, "L E=%d, A=%d, X E=%d, A=%d, Aco=%d, Imu=%d\n",
+    SC[2][1], SC[2][2], SC[2][3], SC[2][4], SC[2][5], SC[2][6]);
+  fprintf(sc, "L E=%d, A=%d, G E=%d, A=%d, X(1) E=%d, A=%d, X(2) E=%d, A=%d, Aco=%d, Imu=%d\n",
+    SC[3][1], SC[3][2], SC[3][3], SC[3][4], SC[3][5], SC[3][6], SC[3][7], SC[3][8], SC[3][9], SC[3][10]);
+
 // Closure of output files
 // =======================
    fclose(fp);
@@ -313,6 +324,7 @@ SaveOutput2DGNUPLOT(int je)
    fclose(scl);
    fclose(scg);
    fclose(scx);
+   fclose(sc);
   }
 // Save the Hybrid MEP results
  if(Model_Number==MEPE || Model_Number==MEPEH){
