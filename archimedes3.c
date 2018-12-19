@@ -207,7 +207,7 @@ static char *progname;
 #include "faradaybcs.h"
 #include "media.h"
 #include "saveoutput2dmeshformat.h"
-#include "saveoutput2dgnuplot.h"
+#include "saveoutput2dgnuplot3.h"
 #include "saveoutput2dholegnuplot.h"
 #include "saveoutput2dholemeshformat.h"
 #include "saveoutputfiles.h"
