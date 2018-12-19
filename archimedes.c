@@ -126,6 +126,7 @@ int IMPURITYPHONONS;
 int CONDUCTION_BAND;
 int SAVE_MESH;
 int NODE_GEO[3][(NXM+1)*(NYM+1)];
+int SC[4][13];
 
 // All "real"'s here...
 real u2d[NXM+1][NYM+1][MN3+1];
