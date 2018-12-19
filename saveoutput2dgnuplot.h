@@ -75,7 +75,7 @@ SaveOutput2DGNUPLOT(int je)
  FILE *scg;
  FILE *scx;
  register int i,j;
- real temp;
+ real x, y;
 
 //if(Material==SILICON || Material==GERMANIUM){
  if(je<=9){
@@ -240,22 +240,25 @@ SaveOutput2DGNUPLOT(int je)
   float energy_L, energy_G, energy_X;
   for(i=1; i<=INUM; i++){
     if(P[i][0] == 1){
-      temp = P[i][5]/dx;
+      x = P[i][5]/dx;
+      y = P[i][6]/dy;
       energy_L = pow(HBAR, 2)*(pow(P[i][1], 2) + pow(P[i][2], 2) + pow(P[i][3], 2)) / (2.*MSTAR[GERMANIUM][1][0] * M)/Q;
       fprintf(egl,"%g %g\n",
-          P[i][5], energy_L-PSI[int(temp)][int(ny/2)]);
+          P[i][5], energy_L-PSI[int(x)][int(y)]);
     }
     else if(P[i][0] == 2){
-      temp = P[i][5]/dx;
+      x = P[i][5]/dx;
+      y = P[i][6]/dy;
       energy_G = pow(HBAR, 2)*(pow(P[i][1], 2) + pow(P[i][2], 2) + pow(P[i][3], 2)) / (2.*MSTAR[GERMANIUM][2][0] * M)/Q;
       fprintf(egg,"%g %g\n",
-          P[i][5], energy_G-PSI[int(temp)][int(ny/2)]+0.14194);
+          P[i][5], energy_G-PSI[int(x)][int(y)]+0.14194);
     }
     else{
-      temp = P[i][5]/dx;
+      x = P[i][5]/dx;
+      y = P[i][6]/dy;
       energy_X = pow(HBAR, 2)*(pow(P[i][1], 2) + pow(P[i][2], 2) + pow(P[i][3], 2)) / (2.*MSTAR[GERMANIUM][3][0] * M)/Q;
       fprintf(egx,"%g %g\n",
-          P[i][5], energy_X-PSI[int(temp)][int(ny/2)]+0.14946);
+          P[i][5], energy_X-PSI[int(x)][int(y)]+0.14946);
     }
   }
 
