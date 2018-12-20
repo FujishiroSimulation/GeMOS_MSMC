@@ -25,8 +25,8 @@ CONDUCTIONBAND PARABOLIC
 # Definition of the doping concentration
 # ======================================
 DONORDENSITY    0.       0.         0.2e-6    16.0e-9   1.e22
-DONORDENSITY    0.       12.0e-9    0.034e-6    3.0e-9   5.e22
-DONORDENSITY    0.166e-6   12.0e-9    0.2e-6    3.0e-9   5.e22
+DONORDENSITY    0.       12.0e-9    0.034e-6    16.0e-9   5.e22
+DONORDENSITY    0.166e-6   12.0e-9    0.2e-6    16.0e-9   5.e22
 ACCEPTORDENSITY 0.       0.         0.2e-6    16.0e-9   1.e19
 
 # Definition of the various contacts
