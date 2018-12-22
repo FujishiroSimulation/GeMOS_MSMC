@@ -41,6 +41,9 @@ Read_Input_File(void)
  int i,j;
  int LXflag=0, LYflag=0;
  int transportflag=0;
+ real doner, accepter;
+ real Npotential, Ppotential;
+ real buitinpotential;
  
 // Thess are the default values
 // i.e. if nothing is specified
@@ -507,6 +510,7 @@ Processing the input file\n\
 // read and check the donor concentration value
     fscanf(fp,"%lf",&num);
     conc=num;
+    doner=num;
     if(conc<0.){
       printf("%s: not valid donor density\n",progname);
       exit(EXIT_FAILURE);
@@ -565,6 +569,7 @@ Processing the input file\n\
 // read and check the acceptor concentration value
     fscanf(fp,"%lf",&num);
     conc=num;
+    accepter=num;
     if(conc<0.){
       printf("%s: not valid acceptor density\n",progname);
       exit(EXIT_FAILURE);
@@ -675,6 +680,21 @@ Processing the input file\n\
       fscanf(fp,"%lf",&num);
       denshole=num;
     }
+
+// compute built-in potential for p-n junction germanium MOSFET, MES actually though www
+    if(k==1){
+      // emergency statement but doesn't affect anything to program and no need to fix this declaration
+      EG[GERMANIUM]=0.747-3.587e-4*TL;
+      Npotential = log(2.0*pow(2.0*PI*MSTAR[GERMANIUM][1][1]*M*KB*TL/pow(HBAR,2.0), 1.5));
+      Npotential -= log(doner);
+      Npotential *= KB*TL/Q;
+      Ppotential = log(2.0*pow(2.0*PI*mstarhole*M*KB*TL/pow(HBAR,2.0), 1.5));
+      Ppotential -= log(accepter);
+      Ppotential *= KB*TL/Q;
+      printf("N type germanium (Ec - Ef) = %g P type germanium (Ec - Ef) = %g\n", Npotential, Ppotential);
+      buitinpotential = EG[GERMANIUM]+Npotential+Ppotential;
+      printf("Buit-In Potential for P-N junction is %g\n", buitinpotential);
+    }
 // internal definition of the boundary conditions
 // EDGE[i][j][k] = ref
 // i = 0 BOTTOM EDGE
@@ -699,7 +719,10 @@ Processing the input file\n\
       if(k==0 || k==1){
         EDGE[i][j][1]=potential;
         EDGE[i][j][2]=0;
-        if(k==1) EDGE[i][j][2]=NGATE;
+        if(k==1) {
+          EDGE[i][j][1]-=buitinpotential;
+          EDGE[i][j][2]=NGATE;
+        }
         if(k==1 && (Model_Number==MCH || Model_Number==MEPH
                    || Model_Number==MCEH || Model_Number==MEPEH))
           EDGE[i][j][3]=NI*NI/NGATE;
