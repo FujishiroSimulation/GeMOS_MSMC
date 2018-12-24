@@ -227,7 +227,7 @@ SaveOutput2DGNUPLOT(int je)
   for(j=1;j<=ny+1;j++){
     for(i=1;i<=nx+1;i++)
       fprintf(qp,"%g %g %g\n",
-          1.e6*(i-1.)*dx,1.e6*(j-1.)*dy,u2d[i][j][0]);
+          1.e6*(i-1.)*dx,1.e6*(j-1.)*dy,-u2d[i][j][0]);
       fprintf(qp,"\n");
   }
 
