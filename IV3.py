@@ -21,20 +21,18 @@ for gate in gate_voltage:
         OPTICALSCATTERING ON\n\
         MATERIAL X 0.0 0.2e-6    Y 0.0 3.0e-9  GERMANIUM\n\
         CONDUCTIONBAND PARABOLIC\n\
-        DONORDENSITY    0.       0.         0.2e-6    3.0e-9   1.e22\n\
-        DONORDENSITY    0.       2.25e-9    0.034e-6    3.0e-9   5.e22\n\
-        DONORDENSITY    0.166e-6   2.25e-9    0.2e-6    3.0e-9   5.e22\n\
-        ACCEPTORDENSITY 0.       0.         0.2e-6    3.0e-9   1.e19\n\
+        DONORDENSITY    0.       0.         0.2e-6    3.0e-9   1.e21\n\
+        DONORDENSITY    0.       2.25e-9    0.034e-6    3.0e-9   5.e21\n\
+        DONORDENSITY    0.166e-6   2.25e-9    0.2e-6    3.0e-9   5.e21\n\
+        ACCEPTORDENSITY 0.       0.         0.2e-6    3.0e-9   1.e21\n\
         CONTACT DOWN  0.0    0.2e-6 INSULATOR 0.0\n\
         CONTACT LEFT  0.0    3.0e-9 INSULATOR 0.0\n\
         CONTACT RIGHT 0.0    3.0e-9 INSULATOR 0.0\n\
         CONTACT UP    0.034e-6 0.068e-6 INSULATOR 0.0\n\
         CONTACT UP    0.132e-6 0.166e-6 INSULATOR 0.0\n\
-        CONTACT UP    0.0    0.034e-6 OHMIC     0.0 5.e22\n\
+        CONTACT UP    0.0    0.034e-6 OHMIC     0.0 5.e21\n\
         CONTACT UP    0.068e-6 0.132e-6 SCHOTTKY  "+str(gate)+"\n\
-        CONTACT UP    0.166e-6 0.2e-6 OHMIC       "+str(drain)+"  5.e22\n\
-        OXYDE   UP    0.068e-6 0.132e-6 0.005e-6 0.3\n\
-        OXYDE   DOWN  0.0      0.2e-6  0.010e-6 0.3\n\
+        CONTACT UP    0.166e-6 0.2e-6 OHMIC       "+str(drain)+"  5.e21\n\
         QEP_MODEL DENSITY_GRADIENT\n\
         LATTICETEMPERATURE 300.\n\
         STATISTICALWEIGHT 200\n\
