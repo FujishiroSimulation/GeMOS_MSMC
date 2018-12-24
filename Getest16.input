@@ -24,10 +24,10 @@ CONDUCTIONBAND PARABOLIC
 
 # Definition of the doping concentration
 # ======================================
-DONORDENSITY    0.       0.         0.2e-6    16.0e-9   1.e22
-DONORDENSITY    0.       12.0e-9    0.034e-6    16.0e-9   5.e22
-DONORDENSITY    0.166e-6   12.0e-9    0.2e-6    16.0e-9   5.e22
-ACCEPTORDENSITY 0.       0.         0.2e-6    16.0e-9   1.e19
+DONORDENSITY    0.       0.         0.2e-6    16.0e-9   1.e21
+DONORDENSITY    0.       12.0e-9    0.034e-6    16.0e-9   5.e21
+DONORDENSITY    0.166e-6   12.0e-9    0.2e-6    16.0e-9   5.e21
+ACCEPTORDENSITY 0.       0.         0.2e-6    16.0e-9   1.e21
 
 # Definition of the various contacts
 # ==================================
@@ -36,9 +36,9 @@ CONTACT LEFT  0.0      16.0e-9  INSULATOR 0.0
 CONTACT RIGHT 0.0      16.0e-9  INSULATOR 0.0
 CONTACT UP    0.034e-6 0.068e-6 INSULATOR 0.0
 CONTACT UP    0.132e-6 0.166e-6 INSULATOR 0.0
-CONTACT UP    0.0      0.034e-6 OHMIC     0.0 5.e22
-CONTACT UP    0.068e-6 0.132e-6 SCHOTTKY  -1.0
-CONTACT UP    0.166e-6 0.2e-6   OHMIC     0.8 5.e22
+CONTACT UP    0.0      0.034e-6 OHMIC     0.0 5.e21
+CONTACT UP    0.068e-6 0.132e-6 SCHOTTKY  0.0
+CONTACT UP    0.166e-6 0.2e-6   OHMIC     0.0 5.e21
 
 # Definition of the upper SiO2 interface
 # ======================================
