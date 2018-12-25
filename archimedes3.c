@@ -188,6 +188,7 @@ real COORD[2][(NXM+1)*(NYM+1)];
 real ANISO[5][5];
 real HIV[8];
 real DIV[8];
+real BUILDPOTENTIAL;
 
 // All structures here...
 time_t binarytime;
@@ -768,7 +769,8 @@ For more information about these matters, see the file named COPYING.\n",
 
 // Boundary conditions for the model simulated
 // ===========================================
-     PoissonBCs();
+     //PoissonBCs();
+      PoissonBCs();
      if(FARADAYFLAG) FaradayBCs();
 
 // Initialisation for Monte Carlo
