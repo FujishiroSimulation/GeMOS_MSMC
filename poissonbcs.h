@@ -69,6 +69,7 @@ PoissonBCs(void)
     for(i=1;i<=sio2nx+1;i++){
        u2d[i+(int)(SIO2_INI[1]/dy)][0][0]=SIO2[1][i][sio2ny+2];
        u2d[i+(int)(SIO2_INI[1]/dy)][1][0]=SIO2[1][i][sio2ny+1];
+       //printf("%g\n", u2d[i+(int)(SIO2_INI[1]/dy)][0][0]);
     }
    }
 // ###
@@ -127,6 +128,8 @@ PoissonBCs(void)
      if(EDGE[2][i][0]==1 || EDGE[2][i][0]==2){
        u2d[i][ny+1][0]=EDGE[2][i][1];
        u2d[i][ny+2][0]=EDGE[2][i][1];
+       //u2d[i][0][0]=BUILDPOTENTIAL*-1;
+       //u2d[i][1][0]=BUILDPOTENTIAL*-1;
      }
   }
 // Eventual upper SiO2 interface

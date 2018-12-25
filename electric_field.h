@@ -101,13 +101,23 @@ Electric_Field(void)
        u2d[j][k][0]=PSI[j][k]-deltat*rho+deltat*kappa*
              ((PSI[j+1][k]-2.0*PSI[j][k]+PSI[j-1][k])/(dx*dx)
              +(PSI[j][k+1]-2.0*PSI[j][k]+PSI[j][k-1])/(dy*dy));
-     }
+       }
+    
 // Eventual lower SiO2
 // ###
    if(SIO2_DOWN_FLAG==1)
    {
     int sio2nx=(int)(fabs(SIO2_INI[1]-SIO2_FIN[1])/dx);
     int sio2ny=(int)(SIO2_THICKNESS[1]/dy);
+    //printf("%d  ----  %d\n", sio2nx, sio2ny);
+    for(k=0;k<=ny+2;k++){
+      for(j=1;j<=sio2nx;j++){
+        if(k <= ny-28){
+          u2d[j+(int)(SIO2_INI[1]/dx)][k][0]=(BUILDPOTENTIAL*-1);
+          //printf("%d --- %d --- %g\n", k, j, u2d[j+(int)(SIO2_INI[1]/dx)][k][0]);
+        } 
+      }
+    }
     if(sio2nx==0) sio2nx++;
     if(sio2ny==0) sio2ny++;
 // BCs for lower SiO2
@@ -116,6 +126,7 @@ Electric_Field(void)
     for(j=1;j<=sio2nx+1;j++){
       SIO2[1][j][0]=SIO2_POT[1];
       SIO2[1][j][1]=SIO2_POT[1];
+      //printf("%g\n", SIO2[1][j][1]);
     }
 // left and right boundaries
     for(j=1;j<=sio2ny+1;j++){
@@ -136,6 +147,7 @@ Electric_Field(void)
           ((SIO2[1][j+1][k]-2.0*SIO2[1][j][k]+SIO2[1][j-1][k])/(dx*dx)
           +(SIO2[1][j][k+1]-2.0*SIO2[1][j][k]+SIO2[1][j][k-1])/(dy*dy));
      }
+     
    }
 // ###
  }

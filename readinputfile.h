@@ -694,6 +694,7 @@ Processing the input file\n\
       printf("N type germanium (Ec - Ef) = %g P type germanium (Ec - Ef) = %g\n", Npotential, Ppotential);
       buitinpotential = EG[GERMANIUM]+Npotential+Ppotential;
       printf("Buit-In Potential for P-N junction is %g\n", buitinpotential);
+      BUILDPOTENTIAL = buitinpotential;
     }
 // internal definition of the boundary conditions
 // EDGE[i][j][k] = ref
