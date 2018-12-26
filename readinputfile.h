@@ -87,6 +87,7 @@ Read_Input_File(void)
  leid_flag=0;
  SIO2_UP_FLAG=0; // No upper SiO2
  SIO2_DOWN_FLAG=0; // No lower SiO2
+ MOSFET_FLAG=0;
 // =====================
 
 // Reading the input file
@@ -299,6 +300,10 @@ Processing the input file\n\
       printf("%s: not valid final time\n",progname);
     }
     printf("FINAL TIME = %lg ---> Ok\n",TF);
+  }
+// Setting the Mosfet
+  else if(strcmp(s,"MOSFET")==0){
+    MOSFET_FLAG=1;
   }
 // Setting the Silicon Oxyde interface
   else if(strcmp(s,"OXYDE")==0){
@@ -682,19 +687,21 @@ Processing the input file\n\
     }
 
 // compute built-in potential for p-n junction germanium MOSFET, MES actually though www
-    if(k==1){
-      // emergency statement but doesn't affect anything to program and no need to fix this declaration
-      EG[GERMANIUM]=0.747-3.587e-4*TL;
-      Npotential = log(2.0*pow(2.0*PI*MSTAR[GERMANIUM][1][1]*M*KB*TL/pow(HBAR,2.0), 1.5));
-      Npotential -= log(doner);
-      Npotential *= KB*TL/Q;
-      Ppotential = log(2.0*pow(2.0*PI*mstarhole*M*KB*TL/pow(HBAR,2.0), 1.5));
-      Ppotential -= log(accepter);
-      Ppotential *= KB*TL/Q;
-      printf("N type germanium (Ec - Ef) = %g P type germanium (Ec - Ef) = %g\n", Npotential, Ppotential);
-      buitinpotential = EG[GERMANIUM]+Npotential+Ppotential;
-      printf("Buit-In Potential for P-N junction is %g\n", buitinpotential);
-      BUILDPOTENTIAL = buitinpotential;
+    if(MOSFET_FLAG==1){
+      if(k==1){
+        // emergency statement but doesn't affect anything to program and no need to fix this declaration
+        EG[GERMANIUM]=0.747-3.587e-4*TL;
+        Npotential = log(2.0*pow(2.0*PI*MSTAR[GERMANIUM][1][1]*M*KB*TL/pow(HBAR,2.0), 1.5));
+        Npotential -= log(doner);
+        Npotential *= KB*TL/Q;
+        Ppotential = log(2.0*pow(2.0*PI*mstarhole*M*KB*TL/pow(HBAR,2.0), 1.5));
+        Ppotential -= log(accepter);
+        Ppotential *= KB*TL/Q;
+        printf("N type germanium (Ec - Ef) = %g P type germanium (Ec - Ef) = %g\n", Npotential, Ppotential);
+        buitinpotential = EG[GERMANIUM]+Npotential+Ppotential;
+        printf("Buit-In Potential for P-N junction is %g\n", buitinpotential);
+        BUILDPOTENTIAL = buitinpotential;
+      }
     }
 // internal definition of the boundary conditions
 // EDGE[i][j][k] = ref
