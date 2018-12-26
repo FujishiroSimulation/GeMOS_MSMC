@@ -65,6 +65,7 @@ SaveOutput2DGNUPLOT(int je)
  FILE *qp;
  FILE *zp;
  FILE *fM;
+ FILE *eg;
  FILE *egl;
  FILE *egg;
  FILE *egx;
@@ -100,6 +101,8 @@ SaveOutput2DGNUPLOT(int je)
    qp=fopen(s,"w");
    sprintf(s,"z_potential00%d.xyz",je);
    zp=fopen(s,"w");
+   sprintf(s,"z_energy_distribution00%d.xyz",je);
+   eg=fopen(s,"w");
    sprintf(s,"energy_distribution_L00%d.xyz",je);
    egl=fopen(s,"w");
    sprintf(s,"energy_distribution_G00%d.xyz",je);
@@ -264,7 +267,12 @@ SaveOutput2DGNUPLOT(int je)
           P[i][5], energy_X-PSI[int(x)][int(y)]+0.18357);
     }
   }
-
+// Energy distribution (no energy)
+// =====================
+  for(i=1; i<=INUM; i++){
+      fprintf(eg,"%g %g\n",
+          P[i][5],P[i][6]);
+  }
 // Scattering rate before normalization
 // ====================================
 // Valley L => 12 G => 6 X => 10
@@ -321,6 +329,7 @@ SaveOutput2DGNUPLOT(int je)
    fclose(ep);
    fclose(qp);
    fclose(zp);
+   fclose(eg);
    fclose(egl);
    fclose(egg);
    fclose(egx);
