@@ -110,12 +110,14 @@ Electric_Field(void)
     int sio2nx=(int)(fabs(SIO2_INI[1]-SIO2_FIN[1])/dx);
     int sio2ny=(int)(SIO2_THICKNESS[1]/dy);
     //printf("%d  ----  %d\n", sio2nx, sio2ny);
-    for(k=0;k<=ny+2;k++){
-      for(j=1;j<=sio2nx;j++){
-        if(k <= ny-28){
-          u2d[j+(int)(SIO2_INI[1]/dx)][k][0]=(BUILDPOTENTIAL*-1);
-          //printf("%d --- %d --- %g\n", k, j, u2d[j+(int)(SIO2_INI[1]/dx)][k][0]);
-        } 
+    if(MOSFET_FLAG==1){
+      for(k=0;k<=ny+2;k++){
+        for(j=1;j<=sio2nx;j++){
+          if(k <= ny-(ny-2)){
+            u2d[j+(int)(SIO2_INI[1]/dx)][k][0]=(BUILDPOTENTIAL*-1);
+            //printf("%d --- %d --- %g\n", k, j, u2d[j+(int)(SIO2_INI[1]/dx)][k][0]);
+          } 
+        }
       }
     }
     if(sio2nx==0) sio2nx++;

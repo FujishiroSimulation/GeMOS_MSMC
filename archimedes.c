@@ -115,6 +115,7 @@ int ISEED,NP1,INUM,IV;
 int c,Model_Number,File_Format,Quantum_Flag;
 int NG,NE;
 int leid_flag;
+int MOSFET_FLAG;
 int SIO2_UP_FLAG;
 int SIO2_DOWN_FLAG;
 int FARADAYFLAG;
