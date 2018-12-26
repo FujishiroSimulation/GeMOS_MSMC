@@ -33,6 +33,26 @@
 // Ensemble Monte Carlo method
 
 void
+checkvalley(real KX, real KY, real KZ, int i, int j){
+    // check which valley particle belong to...
+    real k=KX*KX+KY*KY+KZ*KZ;
+    //printf("%g\n", ksquared);
+    real temp_energy;
+    temp_energy=HHM[i_dom[i][j]][IV]*k*-1; // in eV
+    //printf("%g\n", temp_energy);
+    if(temp_energy <= u2d[i][j][0]-EMIN[i_dom[i][j]][1] && temp_energy > u2d[i][j][0]-EMIN[i_dom[i][j]][2]){
+        //printf("%g\n", u2d[i][j][0]-EMIN[i_dom[i][j]][1]);
+        IV = 1;
+    }
+    else if (temp_energy <= u2d[i][j][0]-EMIN[i_dom[i][j]][2] && temp_energy < u2d[i][j][0]-EMIN[i_dom[i][j]][3]){
+        IV = 2;
+    }
+    else{
+        IV = 3;
+    }
+}
+
+void
 EMC(void)
 {
  long int n=1;
@@ -60,6 +80,8 @@ EMC(void)
        if(j<=1)  j=1;
        if(i>=nx) i=nx;
        if(j>=ny) j=ny;
+       // check which valley a particle belong to...
+       checkvalley(KX, KY, KZ, i, j);
        scat(i_dom[i][j]);
        ti=TS;
        i=(int)(X/dx)+1;
@@ -72,6 +94,14 @@ EMC(void)
     }
     tau=tdt-ti;
     drift(tau);
+    i=(int)(X/dx)+1;
+    j=(int)(Y/dy)+1;
+    if(i<=1)  i=1;
+    if(j<=1)  j=1;
+    if(i>=nx) i=nx;
+    if(j>=ny) j=ny;
+    // check which valley a particle belong to...
+    checkvalley(KX, KY, KZ, i, j);
 
 // check if a particle is going out from the right edge of the device
     if(IV!=9){

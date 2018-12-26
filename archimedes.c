@@ -39,7 +39,6 @@
 #include<memory.h>
 #include<time.h>
 #ifdef	HAVE_STRING_H
-#include<string.h>
 #else
 #include<strings.h>
 #endif
@@ -233,6 +232,7 @@ static char *progname;
 #include "hole_relaxation.h"
 #include "updating.h"
 #include "readinputfile.h"
+//#include "check_current_valley.h"
 //#include "SaveRappture.h"
 
 int 

@@ -73,11 +73,11 @@ scat(int Material)
                        +CB_FULL[Material][10]; // in eV
   }
   if(CONDUCTION_BAND==KANE){
-   thesquareroot=sqrt(1.+4.*alphaK[Material][1]*HHM[Material][0]*ksquared);
+   thesquareroot=sqrt(1.+4.*alphaK[Material][1]*HHM[Material][IV]*ksquared);
    superparticle_energy=(thesquareroot-1.)/(2.*alphaK[Material][1]);
   }
   if(CONDUCTION_BAND==PARABOLIC){
-   superparticle_energy=HHM[Material][0]*ksquared; // in eV
+   superparticle_energy=HHM[Material][IV]*ksquared; // in eV
   }
   if(superparticle_energy<=0.) return;
   ie=((int)(superparticle_energy/DE))+1;
