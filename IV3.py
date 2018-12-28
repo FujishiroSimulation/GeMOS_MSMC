@@ -11,6 +11,7 @@ for gate in gate_voltage:
         f = open("script.input","w")
         script = "\
         TRANSPORT MC ELECTRONS\n\
+        MOSFET\n\
         FINALTIME 15.0e-12\n\
         TIMESTEP 0.0015e-12\n\
         XLENGTH 0.2e-6\n\
