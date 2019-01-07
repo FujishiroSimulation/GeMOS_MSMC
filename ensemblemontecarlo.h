@@ -44,7 +44,7 @@ checkvalley(real KX, real KY, real KZ, int i, int j){
         //printf("%g\n", u2d[i][j][0]-EMIN[i_dom[i][j]][1]);
         IV = 1;
     }
-    else if (temp_energy <= u2d[i][j][0]-EMIN[i_dom[i][j]][2] && temp_energy < u2d[i][j][0]-EMIN[i_dom[i][j]][3]){
+    else if (temp_energy <= u2d[i][j][0]-EMIN[i_dom[i][j]][2] && temp_energy > u2d[i][j][0]-EMIN[i_dom[i][j]][3]){
         IV = 2;
     }
     else{
