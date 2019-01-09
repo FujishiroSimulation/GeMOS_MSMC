@@ -81,7 +81,7 @@ EMC(void)
        if(i>=nx) i=nx;
        if(j>=ny) j=ny;
        // check which valley a particle belong to...
-       checkvalley(KX, KY, KZ, i, j);
+       // checkvalley(KX, KY, KZ, i, j);
        scat(i_dom[i][j]);
        ti=TS;
        i=(int)(X/dx)+1;
@@ -94,6 +94,7 @@ EMC(void)
     }
     tau=tdt-ti;
     drift(tau);
+    /*
     i=(int)(X/dx)+1;
     j=(int)(Y/dy)+1;
     if(i<=1)  i=1;
@@ -102,7 +103,8 @@ EMC(void)
     if(j>=ny) j=ny;
     // check which valley a particle belong to...
     checkvalley(KX, KY, KZ, i, j);
-
+    */
+   
 // check if a particle is going out from the right edge of the device
     if(IV!=9){
      i=(int)(X/dx+1.5);
