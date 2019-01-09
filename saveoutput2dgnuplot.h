@@ -66,6 +66,7 @@ SaveOutput2DGNUPLOT(int je)
  FILE *zp;
  FILE *fM;
  FILE *eg;
+ FILE *oc;
  FILE *egl;
  FILE *egg;
  FILE *egx;
@@ -101,6 +102,8 @@ SaveOutput2DGNUPLOT(int je)
    qp=fopen(s,"w");
    sprintf(s,"z_potential00%d.xyz",je);
    zp=fopen(s,"w");
+   sprintf(s,"occupancy00%d.xyz",je);
+   oc=fopen(s,"w");
    sprintf(s,"z_energy_distribution00%d.xyz",je);
    eg=fopen(s,"w");
    sprintf(s,"energy_distribution_L00%d.xyz",je);
@@ -241,6 +244,38 @@ SaveOutput2DGNUPLOT(int je)
         1.e6*(j-1.)*dy,PSI[60][j]);
   }
   
+// occupancy
+// =========
+  int CL, CG, CX, CT;
+  float OL, OG, OX;
+  for (j=0; j<=nx-1; j++){
+    CL=0;
+    CG=0;
+    CX=0;
+    CT=0;
+    OL=0;
+    OG=0;
+    OX=0;
+    for(i=1; i<=INUM; i++){
+      if(int(P[i][5]/dx) == j){
+        if(P[i][0] == 1){
+          CL++;
+        }
+        else if(P[i][0] == 2){
+          CG++;
+        }
+        else if(P[i][0] == 3){
+          CX++;
+        }
+      }
+    }
+    CT = CL + CG + CX;
+    OL = float(CL) / float(CT);
+    OG = float(CG) / float(CT);
+    OX = float(CX) / float(CT);
+    fprintf(oc,"%g %d %g %g %g\n",
+        1.e6*j*dx, CT, OL, OG, OX);
+  }
 // Energy distribution
 // ===========================
   float energy_L, energy_G, energy_X;
@@ -330,6 +365,7 @@ SaveOutput2DGNUPLOT(int je)
    fclose(qp);
    fclose(zp);
    fclose(eg);
+   fclose(oc);
    fclose(egl);
    fclose(egg);
    fclose(egx);

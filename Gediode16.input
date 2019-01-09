@@ -10,7 +10,7 @@ TRANSPORT MC ELECTRONS
 FINALTIME 1.0e-12
 TIMESTEP 0.0001e-12
 
-XLENGTH 30.0e-9
+XLENGTH 200.0e-9
 YLENGTH 16.0e-9
 
 XSPATIALSTEP 100
@@ -23,25 +23,24 @@ OPTICALSCATTERING ON
 CONDUCTIONBAND PARABOLIC
 
 # definition of the material (all the device is made of Silicon)
-MATERIAL X 0.0 30.0e-9    Y 0.0 16.0e-9  GERMANIUM
+MATERIAL X 0.0 200.0e-9    Y 0.0 16.0e-9  GERMANIUM
 
 # Definition of the doping concentration
 # ======================================
-DONORDENSITY    0.0       0.0    30.0e-9    16.0e-9    5.e25
-DONORDENSITY    0.0       0.0    4.50e-9    16.0e-9    1.e26
-DONORDENSITY    25.5e-9   0.0    30.0e-9    16.0e-9    1.e26
-ACCEPTORDENSITY 0.0       0.0    30.0e-9    16.0e-9    1.e20
+DONORDENSITY    0.0       0.0    200.0e-9    16.0e-9    1.e23
+DONORDENSITY    0.0       0.0    34.0e-9     16.0e-9    1.e25
+DONORDENSITY    166.0e-9  0.0    200.0e-9    16.0e-9    1.e25
+ACCEPTORDENSITY 0.0       0.0    200.0e-9    16.0e-9    1.e20
 
 # Definition of the various contacts
 # ==================================
-CONTACT LEFT  0.0    16.0e-9 OHMIC     0.0     1.e26
-CONTACT RIGHT 0.0    16.0e-9 OHMIC     0.25    1.e26
-CONTACT UP    0.0    30.0e-9 INSULATOR 0.0
-CONTACT DOWN  0.0    30.0e-9 INSULATOR 0.0
+CONTACT LEFT  0.0    16.0e-9 OHMIC     0.0     1.e25
+CONTACT RIGHT 0.0    16.0e-9 OHMIC     0.25    1.e25
+CONTACT UP    0.0    200.0e-9 INSULATOR 0.0
+CONTACT DOWN  0.0    200.0e-9 INSULATOR 0.0
 
 # Quantum effective potential
 # ===========================
-QEP ON
 QEP_PARAMETERS 0.0 3.4
 QEP_MODEL DENSITY_GRADIENT
 
