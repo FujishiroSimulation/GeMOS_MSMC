@@ -56,6 +56,7 @@ SaveOutput2DGNUPLOT(int je)
 {
  char s[150];
  FILE *fp;
+ FILE *xv;
  FILE *up;
  FILE *vp;
  FILE *lp;
@@ -84,6 +85,8 @@ SaveOutput2DGNUPLOT(int je)
  if(je<=9){
    sprintf(s,"density00%d.xyz",je);
    fp=fopen(s,"w");
+   sprintf(s,"x_velocity_xcoordinate00%d.xyz",je);
+   xv=fopen(s,"w");
    sprintf(s,"x_velocity00%d.xyz",je);
    up=fopen(s,"w");
    sprintf(s,"y_velocity00%d.xyz",je);
@@ -175,6 +178,16 @@ SaveOutput2DGNUPLOT(int je)
     for(i=1;i<=nx+1;i++)
       fprintf(fp,"%g %g %g\n",1.e6*(i-1.)*dx,1.e6*(j-1.)*dy,u2d[i][j][1]);
       fprintf(fp,"\n");
+  }
+// X-velocity of X-coordinate output
+// =================================
+  float TV;
+  for(i=1;i<=nx+1;i++){
+    TV=0.0;
+    for(j=1;j<=ny+1;j++){
+      TV = TV + u2d[i][j][2]/MEDIA;
+    }
+    fprintf(xv,"%g %g\n",1.e6*(i-1.)*dx, TV/(ny+1));
   }
 // X-component of electronic velocity output
 // =========================================
@@ -355,6 +368,7 @@ SaveOutput2DGNUPLOT(int je)
 // Closure of output files
 // =======================
    fclose(fp);
+   fclose(xv);
    fclose(up);
    fclose(vp);
    fclose(lp);
