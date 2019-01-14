@@ -314,8 +314,8 @@ SaveOutput2DGNUPLOT(int je)
     OL = float(CL) / float(CT);
     OG = float(CG) / float(CT);
     OX = float(CX) / float(CT);
-    fprintf(oc,"%g %d %g %g %g\n",
-        1.e6*j*dx, CT, OL, OG, OX);
+    fprintf(oc,"%g %g %g %g\n",
+        1.e6*j*dx, OL, OG, OX);
   }
 // Energy distribution
 // ===========================
