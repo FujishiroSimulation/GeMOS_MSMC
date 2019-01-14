@@ -57,9 +57,11 @@ SaveOutput2DGNUPLOT(int je)
  char s[150];
  FILE *fp;
  FILE *xv;
+ FILE *xvt;
  FILE *up;
  FILE *vp;
  FILE *lp;
+ FILE *xet;
  FILE *lxp;
  FILE *lyp;
  FILE *ep;
@@ -78,6 +80,7 @@ SaveOutput2DGNUPLOT(int je)
  FILE *scg;
  FILE *scx;
  FILE *sc;
+ FILE *su;
  register int i,j;
  real x, y;
 
@@ -87,6 +90,8 @@ SaveOutput2DGNUPLOT(int je)
    fp=fopen(s,"w");
    sprintf(s,"x_velocity_xcoordinate00%d.xyz",je);
    xv=fopen(s,"w");
+   sprintf(s,"x_velocity_xtransit00%d.xyz",je);
+   xvt=fopen(s,"w");
    sprintf(s,"x_velocity00%d.xyz",je);
    up=fopen(s,"w");
    sprintf(s,"y_velocity00%d.xyz",je);
@@ -97,6 +102,8 @@ SaveOutput2DGNUPLOT(int je)
    lp=fopen(s,"w");
    sprintf(s,"magnetic_field00%d.xyz",je);
    fM=fopen(s,"w");
+   sprintf(s,"x_Efield_xtransit00%d.xyz",je);
+   xet=fopen(s,"w");
    sprintf(s,"x_Efield00%d.xyz",je);
    lxp=fopen(s,"w");
    sprintf(s,"y_Efield00%d.xyz",je);
@@ -129,6 +136,8 @@ SaveOutput2DGNUPLOT(int je)
    scx=fopen(s,"w");
    sprintf(s,"scatterign_count00%d.xyz",je);
    sc=fopen(s,"w");
+   sprintf(s,"Summary00%d.xyz",je);
+   su=fopen(s,"w");
  }
  else if(je>9 && je<=99){
    sprintf(s,"density0%d.xyz",je);
@@ -179,7 +188,7 @@ SaveOutput2DGNUPLOT(int je)
       fprintf(fp,"%g %g %g\n",1.e6*(i-1.)*dx,1.e6*(j-1.)*dy,u2d[i][j][1]);
       fprintf(fp,"\n");
   }
-  // X-velocity of X-coordinate output
+// X-velocity of X-coordinate output
 // =================================
   float TV;
   for(i=1;i<=nx+1;i++){
@@ -188,6 +197,16 @@ SaveOutput2DGNUPLOT(int je)
       TV = TV + u2d[i][j][2]/MEDIA;
     }
     fprintf(xv,"%g %g\n",1.e6*(i-1.)*dx, TV/(ny+1));
+  }
+// X-velocity of X-transit output (34nm to 166nm portion in the case of 200nm)
+// ==============================
+  for(j=1;j<=ny+1;j++){
+    for(i=1;i<=nx+1;i++){
+      if(i >= 18 && i <= 84){
+        fprintf(xvt,"%g %g %g\n",1.e6*(i-1.)*dx,1.e6*(j-1.)*dy,
+              u2d[i][j][2]/MEDIA);
+      }
+    }  
   }
 // X-component of electronic velocity output
 // =========================================
@@ -218,6 +237,15 @@ SaveOutput2DGNUPLOT(int je)
     for(i=1;i<=nx+1;i++)
       fprintf(fM,"%g %g %g\n",1.e6*(i-1.)*dx,1.e6*(j-1.)*dy,B[i][j]);
       fprintf(fM,"\n");
+  }
+// X-field of X-transit output (34nm to 166nm portion in the case of 200nm)
+// ==============================
+  for(j=1;j<=ny+1;j++){
+    for(i=1;i<=nx+1;i++){
+      if(i >= 18 && i <= 84){
+        fprintf(xet,"%g %g %g\n",1.e6*(i-1.)*dx,1.e6*(j-1.)*dy,E[i][j][0]);
+      }
+    }
   }
 // X-component of electric field
 // =============================
@@ -365,14 +393,34 @@ SaveOutput2DGNUPLOT(int je)
   fprintf(sc, "L E=%d, A=%d, G E=%d, A=%d, X(1) E=%d, A=%d, X(2) E=%d, A=%d, Aco=%d, Imu=%d\n",
     SC[3][1], SC[3][2], SC[3][3], SC[3][4], SC[3][5], SC[3][6], SC[3][7], SC[3][8], SC[3][9], SC[3][10]);
 
+// Summary
+// =======
+  int count;
+  float SE, SV;
+  count = 0;
+  SE = 0.0;
+  SV = 0.0;
+  for(j=1;j<=ny+1;j++){
+    for(i=1;i<=nx+1;i++){
+      if(i >= 18 && i <= 84){
+        SE = SE + E[i][j][0];
+        SV = SV + u2d[i][j][2]/MEDIA;
+        count++;
+      }
+    }
+  }
+  fprintf(su,"Efield:xvelocity %g %g\n",SE/float(count),SV/float(count));
+
 // Closure of output files
 // =======================
    fclose(fp);
    fclose(xv);
+   fclose(xvt);
    fclose(up);
    fclose(vp);
    fclose(lp);
    fclose(fM);
+   fclose(xet);
    fclose(lxp);
    fclose(lyp);
    fclose(ep);
@@ -387,6 +435,7 @@ SaveOutput2DGNUPLOT(int je)
    fclose(scg);
    fclose(scx);
    fclose(sc);
+   fclose(su);
   }
 // Save the Hybrid MEP results
  if(Model_Number==MEPE || Model_Number==MEPEH){
