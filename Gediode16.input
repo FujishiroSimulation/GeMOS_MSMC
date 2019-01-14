@@ -27,15 +27,15 @@ MATERIAL X 0.0 200.0e-9    Y 0.0 16.0e-9  GERMANIUM
 
 # Definition of the doping concentration
 # ======================================
-DONORDENSITY    0.0       0.0    200.0e-9    16.0e-9    1.e23
-DONORDENSITY    0.0       0.0    34.0e-9     16.0e-9    1.e25
-DONORDENSITY    166.0e-9  0.0    200.0e-9    16.0e-9    1.e25
+DONORDENSITY    0.0       0.0    200.0e-9    16.0e-9    1.e22
+DONORDENSITY    0.0       0.0    34.0e-9     16.0e-9    1.e24
+DONORDENSITY    166.0e-9  0.0    200.0e-9    16.0e-9    1.e24
 ACCEPTORDENSITY 0.0       0.0    200.0e-9    16.0e-9    1.e20
 
 # Definition of the various contacts
 # ==================================
-CONTACT LEFT  0.0    16.0e-9 OHMIC     0.0     1.e25
-CONTACT RIGHT 0.0    16.0e-9 OHMIC     0.25    1.e25
+CONTACT LEFT  0.0    16.0e-9 OHMIC     0.0     1.e24
+CONTACT RIGHT 0.0    16.0e-9 OHMIC     0.5     1.e24
 CONTACT UP    0.0    200.0e-9 INSULATOR 0.0
 CONTACT DOWN  0.0    200.0e-9 INSULATOR 0.0
 
