@@ -404,7 +404,7 @@ MCparameters(int Material)
 
     // Parameters for Inter Valley Scattering
     real zl = 4.0;
-    real zd = 3.0;
+    real zd = 2.0;
     for(j=0; j<=6; j++){
         w[j]=HIV[j]*Q/HBAR;
         n[j]=1./(exp(HIV[j]/BKTQ)-1.);

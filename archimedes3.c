@@ -539,8 +539,8 @@ For more information about these matters, see the file named COPYING.\n",
      MSTAR[GERMANIUM][1][1]=0.1547;   // L valley Density Mass
      MSTAR[GERMANIUM][2][0]=0.1797;   // Gamma valley Conductivity Mass
      MSTAR[GERMANIUM][2][1]=0.1797;   // Gamma valley Density Mass
-     MSTAR[GERMANIUM][3][0]=0.3476;   // Delta valley Conductivity Mass
-     MSTAR[GERMANIUM][3][1]=0.4027;   // Delta valley Density Mass
+     MSTAR[GERMANIUM][3][0]=0.2061;   // Delta valley Conductivity Mass
+     MSTAR[GERMANIUM][3][1]=0.4969;   // Delta valley Density Mass
      MSTAR[INSB][1][0]=0.0135;      // Gamma-valley -- see Ram-Mohan
      MSTAR[ALSB][1][0]=0.14;        // Gamma-valley -- See Ram-Mohan
      MSTAR[ALAS][1][0]=0.149;       // Gamma-valley -- see Ram-Mohan J.App.Phys. Vol.89, Num.11
