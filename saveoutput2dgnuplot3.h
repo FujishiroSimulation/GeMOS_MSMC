@@ -409,7 +409,21 @@ SaveOutput2DGNUPLOT(int je)
       }
     }
   }
-  fprintf(su,"Efield:xvelocity %g %g\n",SE/float(count),SV/float(count));
+  fprintf(su,"Efield:xvelocity(n+ region 1/6) %g %g\n",SE/float(count),SV/float(count));
+
+  count = 0;
+  SE = 0.0;
+  SV = 0.0;
+  for(j=1;j<=ny+1;j++){
+    for(i=1;i<=nx+1;i++){
+      if(i >= 31 && i <= 71){
+        SE = SE + E[i][j][0];
+        SV = SV + u2d[i][j][2]/MEDIA;
+        count++;
+      }
+    }
+  }
+  fprintf(su,"Efield:xvelocity(n+ region 3/10) %g %g\n",SE/float(count),SV/float(count));
 
 // Closure of output files
 // =======================
