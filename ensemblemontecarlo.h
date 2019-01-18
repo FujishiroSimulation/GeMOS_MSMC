@@ -91,6 +91,17 @@ EMC(void)
        if(i>=nx) i=nx;
        if(j>=ny) j=ny;
        TS=ti-log(rnd())/GM[i_dom[i][j]];
+       if(NOVALLEY[i_dom[i][j]]==3){
+         if(X>=undope_INI && X<=undope_FIN){
+           if(IV==1) TS=ti-log(rnd())/gm[i_dom[i][j]][1][0];
+           if(IV==2) TS=ti-log(rnd())/gm[i_dom[i][j]][2][0];
+           if(IV==3) TS=ti-log(rnd())/gm[i_dom[i][j]][3][0];
+         }else{
+           if(IV==1) TS=ti-log(rnd())/gm[i_dom[i][j]][1][1];
+           if(IV==2) TS=ti-log(rnd())/gm[i_dom[i][j]][2][1];
+           if(IV==3) TS=ti-log(rnd())/gm[i_dom[i][j]][3][1];
+         }
+       }
     }
     tau=tdt-ti;
     drift(tau);

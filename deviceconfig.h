@@ -113,6 +113,17 @@ MCdevice_config(void)
       P[n][4]=-log(rnd())/GM[i_dom[i][j]];
       P[n][5]=dx*(rnd()+(real)(i)-1.5);
       P[n][6]=dy*(rnd()+(real)(j)-1.5);
+      if(NOVALLEY[i_dom[i][j]]==3){
+         if(P[n][5]>=undope_INI && P[n][5]<=undope_FIN){
+           if(IV==1) P[n][4]=-log(rnd())/gm[i_dom[i][j]][1][0];
+           if(IV==2) P[n][4]=-log(rnd())/gm[i_dom[i][j]][2][0];
+           if(IV==3) P[n][4]=-log(rnd())/gm[i_dom[i][j]][3][0];
+         }else{
+           if(IV==1) P[n][4]=-log(rnd())/gm[i_dom[i][j]][1][1];
+           if(IV==2) P[n][4]=-log(rnd())/gm[i_dom[i][j]][2][1];
+           if(IV==3) P[n][4]=-log(rnd())/gm[i_dom[i][j]][3][1];
+         }
+       }
       if(i==1) P[n][5]=dx*0.5*rnd();
       if(j==1) P[n][6]=dy*0.5*rnd();
       if(i==nx+1) P[n][5]=LX-dx*0.5*rnd();

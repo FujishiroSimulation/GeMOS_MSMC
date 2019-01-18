@@ -91,6 +91,17 @@ creation(int i,real t,int edge)
  KZ=c2*c4*c7;
  IV=iv;
  TS=t-log(rnd())/GM[i_dom[ii][j]];
+ if(NOVALLEY[i_dom[i][j]]==3){
+  if(X>=undope_INI && X<=undope_FIN){
+    if(IV==1) TS=t-log(rnd())/gm[i_dom[i][j]][1][0];
+    if(IV==2) TS=t-log(rnd())/gm[i_dom[i][j]][2][0];
+    if(IV==3) TS=t-log(rnd())/gm[i_dom[i][j]][3][0];
+  }else{
+    if(IV==1) TS=t-log(rnd())/gm[i_dom[i][j]][1][1];
+    if(IV==2) TS=t-log(rnd())/gm[i_dom[i][j]][2][1];
+    if(IV==3) TS=t-log(rnd())/gm[i_dom[i][j]][3][1];
+  }
+}
  if(edge==2) KY=-KY;
  if(edge==1) KX=-KX;
 }
