@@ -154,6 +154,7 @@ real KX,KY,KZ,X,Y;
 real TS,EPP,DDmax;
 real EDGE[4][NXM+NYM+1][4];
 real CIMP,Nplus,undope,QD2,TAUW;
+real undope_INI, undope_FIN;
 real EPSRSIO2;
 real bufx2d[NXM+1][NYM+1];
 real bufy2d[NXM+1][NYM+1];
