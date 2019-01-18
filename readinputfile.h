@@ -455,6 +455,28 @@ Processing the input file\n\
     printf("CIMP = %g ---> Ok\n",CIMP);
   }
 
+// undope concentration
+  else if(strcmp(s,"UNDOPE")==0){
+    fscanf(fp,"%lf",&num);
+    undope=num;
+    if(undope<0.){
+      printf("%s: not valid undope concentration\n",progname);
+      exit(EXIT_FAILURE);
+    }
+    printf("UNDOPE = %g ---> Ok\n",undope);
+  }
+
+// N+ concentration
+  else if(strcmp(s,"NPLUS")==0){
+    fscanf(fp,"%lf",&num);
+    Nplus=num;
+    if(Nplus<0.){
+      printf("%s: not valid N+ concentration\n",progname);
+      exit(EXIT_FAILURE);
+    }
+    printf("N+ = %g ---> Ok\n", Nplus);
+  }
+
 // read the x length of the device
   else if(strcmp(s,"XLENGTH")==0){
     fscanf(fp,"%lf",&num);

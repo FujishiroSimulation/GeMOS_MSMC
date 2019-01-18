@@ -76,9 +76,15 @@ SaveOutput2DGNUPLOT(int je)
  FILE *scbl;
  FILE *scbg;
  FILE *scbx;
+ FILE *scbln;
+ FILE *scbgn;
+ FILE *scbxn;
  FILE *scl;
  FILE *scg;
  FILE *scx;
+ FILE *scln;
+ FILE *scgn;
+ FILE *scxn;
  FILE *sc;
  FILE *su;
  register int i,j;
@@ -128,12 +134,24 @@ SaveOutput2DGNUPLOT(int je)
    scbg=fopen(s, "w");
    sprintf(s, "Scat_Rate_X00%d.xyz",je);
    scbx=fopen(s, "w");
-   sprintf(s,"scatterign_rate_L00%d.xyz",je);
+   sprintf(s, "Scat_Rate_L_N+00%d.xyz",je);
+   scbln=fopen(s, "w");
+   sprintf(s, "Scat_Rate_G_N+00%d.xyz",je);
+   scbgn=fopen(s, "w");
+   sprintf(s, "Scat_Rate_X_N+00%d.xyz",je);
+   scbxn=fopen(s, "w");
+   sprintf(s,"scattering_rate_L00%d.xyz",je);
    scl=fopen(s,"w");
-   sprintf(s,"scatterign_rate_G00%d.xyz",je);
+   sprintf(s,"scattering_rate_G00%d.xyz",je);
    scg=fopen(s,"w");
-   sprintf(s,"scatterign_rate_X00%d.xyz",je);
+   sprintf(s,"scattering_rate_X00%d.xyz",je);
    scx=fopen(s,"w");
+   sprintf(s,"scattering_rate_L_N+00%d.xyz",je);
+   scln=fopen(s,"w");
+   sprintf(s,"scattering_rate_G_N+00%d.xyz",je);
+   scgn=fopen(s,"w");
+   sprintf(s,"scattering_rate_X_N+00%d.xyz",je);
+   scxn=fopen(s,"w");
    sprintf(s,"scatterign_count00%d.xyz",je);
    sc=fopen(s,"w");
    sprintf(s,"Summary00%d.xyz",je);
@@ -351,6 +369,7 @@ SaveOutput2DGNUPLOT(int je)
   }
 // Scattering rate before normalization
 // ====================================
+// undope layer
 // Valley L => 12 G => 6 X => 10
   int ie=1;
   for(ie=1;ie<DIME;ie++){
@@ -365,9 +384,24 @@ SaveOutput2DGNUPLOT(int je)
     fprintf(scbx, "%g %g %g %g %g %g %g %g %g %g %g\n",
       DE*((real)(ie)), Scat_Rate[2][3][1][ie], Scat_Rate[2][3][2][ie], Scat_Rate[2][3][3][ie], Scat_Rate[2][3][4][ie], Scat_Rate[2][3][5][ie], Scat_Rate[2][3][6][ie], Scat_Rate[2][3][7][ie], Scat_Rate[2][3][8][ie], Scat_Rate[2][3][9][ie], Scat_Rate[2][3][10][ie]);
   }
+// n+ layer
+// Valley L => 12 G => 6 X => 10
+  for(ie=1;ie<DIME;ie++){
+    fprintf(scbln, "%g %g %g %g %g %g %g %g %g %g %g %g %g\n",
+      DE*((real)(ie)), Scat_Rate_N[2][1][1][ie], Scat_Rate_N[2][1][2][ie], Scat_Rate_N[2][1][3][ie], Scat_Rate_N[2][1][4][ie], Scat_Rate_N[2][1][5][ie], Scat_Rate_N[2][1][6][ie], Scat_Rate_N[2][1][7][ie], Scat_Rate_N[2][1][8][ie], Scat_Rate_N[2][1][9][ie], Scat_Rate_N[2][1][10][ie], Scat_Rate_N[2][1][11][ie], Scat_Rate_N[2][1][12][ie]);
+  }
+  for(ie=1;ie<DIME;ie++){
+    fprintf(scbgn, "%g %g %g %g %g %g %g\n",
+      DE*((real)(ie)), Scat_Rate_N[2][2][1][ie], Scat_Rate_N[2][2][2][ie], Scat_Rate_N[2][2][3][ie], Scat_Rate_N[2][2][4][ie], Scat_Rate_N[2][2][5][ie], Scat_Rate_N[2][2][6][ie]);
+  }
+  for(ie=1;ie<DIME;ie++){
+    fprintf(scbxn, "%g %g %g %g %g %g %g %g %g %g %g\n",
+      DE*((real)(ie)), Scat_Rate_N[2][3][1][ie], Scat_Rate_N[2][3][2][ie], Scat_Rate_N[2][3][3][ie], Scat_Rate_N[2][3][4][ie], Scat_Rate_N[2][3][5][ie], Scat_Rate_N[2][3][6][ie], Scat_Rate_N[2][3][7][ie], Scat_Rate_N[2][3][8][ie], Scat_Rate_N[2][3][9][ie], Scat_Rate_N[2][3][10][ie]);
+  }
 
 // Scattering rate
 // ===============
+// undope layer
 // Valley  L => 12 G => 6 X => 10
   for(ie=1;ie<=DIME;ie++){
     fprintf(scl, "%g %g %g %g %g %g %g %g %g %g %g %g %g\n",
@@ -383,6 +417,24 @@ SaveOutput2DGNUPLOT(int je)
   for(ie=1;ie<=DIME;ie++){
     fprintf(scx, "%g %g %g %g %g %g %g %g %g %g %g\n",
       DE*((real)(ie)),  SWK[2][3][1][ie], SWK[2][3][2][ie], SWK[2][3][3][ie], SWK[2][3][4][ie], SWK[2][3][5][ie], SWK[2][3][6][ie], SWK[2][3][7][ie], SWK[2][3][8][ie], SWK[2][3][9][ie], SWK[2][3][10][ie]);
+  }
+
+// N+ layer
+// Valley  L => 12 G => 6 X => 10
+  for(ie=1;ie<=DIME;ie++){
+    fprintf(scln, "%g %g %g %g %g %g %g %g %g %g %g %g %g\n",
+      DE*((real)(ie)),  SWK_N[2][1][1][ie], SWK_N[2][1][2][ie], SWK_N[2][1][3][ie], SWK_N[2][1][4][ie], SWK_N[2][1][5][ie], SWK_N[2][1][6][ie], SWK_N[2][1][7][ie], SWK_N[2][1][8][ie], SWK_N[2][1][9][ie], SWK_N[2][1][10][ie], SWK_N[2][1][11][ie], SWK_N[2][1][12][ie]);
+  }
+// Ganmma Valley
+  for(ie=1;ie<=DIME;ie++){
+    fprintf(scgn, "%g %g %g %g %g %g %g\n",
+      DE*((real)(ie)),  SWK_N[2][2][1][ie], SWK_N[2][2][2][ie], SWK_N[2][2][3][ie], SWK_N[2][2][4][ie], SWK_N[2][2][5][ie],  SWK_N[2][2][6][ie]);
+  }
+
+// X Valley
+  for(ie=1;ie<=DIME;ie++){
+    fprintf(scxn, "%g %g %g %g %g %g %g %g %g %g %g\n",
+      DE*((real)(ie)),  SWK_N[2][3][1][ie], SWK_N[2][3][2][ie], SWK_N[2][3][3][ie], SWK_N[2][3][4][ie], SWK_N[2][3][5][ie], SWK_N[2][3][6][ie], SWK_N[2][3][7][ie], SWK_N[2][3][8][ie], SWK_N[2][3][9][ie], SWK_N[2][3][10][ie]);
   }
 
 // Scattering count
@@ -445,9 +497,18 @@ SaveOutput2DGNUPLOT(int je)
    fclose(egl);
    fclose(egg);
    fclose(egx);
+   fclose(scbl);
+   fclose(scbg);
+   fclose(scbx);
+   fclose(scbln);
+   fclose(scbgn);
+   fclose(scbxn);
    fclose(scl);
    fclose(scg);
    fclose(scx);
+   fclose(scln);
+   fclose(scgn);
+   fclose(scxn);
    fclose(sc);
    fclose(su);
   }
