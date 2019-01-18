@@ -463,7 +463,19 @@ Processing the input file\n\
       printf("%s: not valid undope concentration\n",progname);
       exit(EXIT_FAILURE);
     }
-    printf("UNDOPE = %g ---> Ok\n",undope);
+    fscanf(fp,"%lf",&num);
+    undope_INI=num;
+    if(undope_INI<0.){
+      printf("%s: not valid undope initial position\n",progname);
+      exit(EXIT_FAILURE);
+    }
+    fscanf(fp,"%lf",&num);
+    undope_FIN=num;
+    if(undope_FIN<undope_INI || undope_FIN>LX){
+      printf("%s: not valid undope final position\n",progname);
+      exit(EXIT_FAILURE);
+    }
+    printf("UNDOPE = %g %g %g ---> Ok\n",undope,undope_INI,undope_FIN);
   }
 
 // N+ concentration

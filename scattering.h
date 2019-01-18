@@ -534,6 +534,7 @@ if(NOVALLEY[Material]==3){
    ie=((int)(superparticle_energy/DE))+1;
    if(ie>DIME) ie=DIME;
 
+   if(X>=undope_INI && X<=undope_FIN){
 // Selection of scattering process in the L-Valley
 // ===================================================
   if(IV==1){
@@ -1127,7 +1128,602 @@ if(NOVALLEY[Material]==3){
     }
     if((finalenergy<=0.) || j==0) return;
    }
+}else{
+// Selection of scattering process in the L-Valley
+// ===================================================
+  if(IV==1){
+    r1 = rnd();
+// Polar optical phonons
+// Emission of an optical phonon
+      if(r1<=SWK_N[Material][1][1][ie] && j==0){
+         finalenergy=superparticle_energy-HWO[Material][0];
+         if(finalenergy<=0.) return;
+//         if(finalenergy>DIME*DE) finalenergy=BKTQ;
+         j=1;
+         SC[1][1] += 1;
+// linea 20
+       if(CONDUCTION_BAND==KANE) kf=SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
+       if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
+       f=2.*ki*kf/(ki-kf)/(ki-kf);
+       if(f<=0.) return;
+       cb=(1.+f-pow(1.+2.*f,rnd()))/f;
+// linea 30 -- determination of the final states
+       sb=sqrt(1.-cb*cb);
+       fai=2.*PI*rnd();
+       cf=cos(fai);
+       sf=sin(fai);
+       skk=sqrt(KX*KX+KY*KY);
+       a11=KY/skk;
+       a12=KX*KZ/skk/ki;
+       a13=KX/ki;
+       a21=-KX/skk;
+       a22=KY*KZ/skk/ki;
+       a23=KY/ki;
+       a32=-skk/ki;
+       a33=KZ/ki;
+       x1=kf*sb*cf;
+       x2=kf*sb*sf;
+       x3=kf*cb;
+       KX=a11*x1+a12*x2+a13*x3;
+       KY=a21*x1+a22*x2+a23*x3;
+       KZ=a32*x2+a33*x3;
+       return;
+      }
+// Absorption of an optical phonon
+      if((r1<=SWK_N[Material][1][2][ie]) && j==0){
+         finalenergy=superparticle_energy+HWO[Material][0];
+//         if(finalenergy<0.) return;
+//         if(finalenergy>DIME*DE) finalenergy=BKTQ;
+         j=1;
+         SC[1][2] += 1;
+// linea 20
+       if(CONDUCTION_BAND==KANE) kf=SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
+       if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
+       f=2.*ki*kf/(ki-kf)/(ki-kf);
+       if(f<=0.) return;
+       cb=(1.+f-pow((1.+2.*f),rnd()))/f;
+// linea 30 -- determination of the final states
+       sb=sqrt(1.-cb*cb);
+       fai=2.*PI*rnd();
+       cf=cos(fai);
+       sf=sin(fai);
+       skk=sqrt(KX*KX+KY*KY);
+       a11=KY/skk;
+       a12=KX*KZ/skk/ki;
+       a13=KX/ki;
+       a21=-KX/skk;
+       a22=KY*KZ/skk/ki;
+       a23=KY/ki;
+       a32=-skk/ki;
+       a33=KZ/ki;
+       x1=kf*sb*cf;
+       x2=kf*sb*sf;
+       x3=kf*cb;
+       KX=a11*x1+a12*x2+a13*x3;
+       KY=a21*x1+a22*x2+a23*x3;
+       KZ=a32*x2+a33*x3;
+       return;
+      }
+
+// Inter Valley
+// Emission L(1)
+    if((r1<=SWK_N[Material][1][3][ie]) && j==0){
+       finalenergy=superparticle_energy-HIV[0];
+       if(finalenergy<=0.) return;
+       j=1;
+       SC[1][3] += 1;
+// determination of the final states
+       if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
+       if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
+       cs = 1.-2.*rnd();
+       sn = sqrt(1.-cs*cs);
+       fai = 2.*PI*rnd();
+       KX = kf*cs;
+       KY = kf*sn*cos(fai);
+       KZ = kf*sn*sin(fai);
+       return;
+    }
+// Absorbation L(1)
+    if((r1<=SWK_N[Material][1][4][ie]) && j==0){
+       finalenergy=superparticle_energy+HIV[0];
+       if(finalenergy<=0.) return;
+       j=1;
+       SC[1][4] += 1;
+// determination of the final states
+       if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
+       if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
+       cs = 1.-2.*rnd();
+       sn = sqrt(1.-cs*cs);
+       fai = 2.*PI*rnd();
+       KX = kf*cs;
+       KY = kf*sn*cos(fai);
+       KZ = kf*sn*sin(fai);
+       return;
+    }
+// Emission L(2)
+      if((r1<=SWK_N[Material][1][5][ie]) && j==0){
+         finalenergy=superparticle_energy-HIV[1];
+         if(finalenergy<=0.) return;
+//         if(finalenergy>DIME*DE) finalenergy=BKTQ;
+         j=1;
+         SC[1][5] += 1;
+// determination of the final states
+       if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
+       if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
+       cs = 1.-2.*rnd();
+       sn = sqrt(1.-cs*cs);
+       fai = 2.*PI*rnd();
+       KX = kf*cs;
+       KY = kf*sn*cos(fai);
+       KZ = kf*sn*sin(fai);
+       return;
+      }
+// Absorption L(2)
+      if((r1<=SWK_N[Material][1][6][ie]) && j==0){
+         finalenergy=superparticle_energy+HIV[1];
+         if(finalenergy<=0.) return;
+//         if(finalenergy>DIME*DE) finalenergy=BKTQ;
+         j=1;
+         SC[1][6] += 1;
+// determination of the final states
+       if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
+       if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
+       cs = 1.-2.*rnd();
+       sn = sqrt(1.-cs*cs);
+       fai = 2.*PI*rnd();
+       KX = kf*cs;
+       KY = kf*sn*cos(fai);
+       KZ = kf*sn*sin(fai);
+       return;
+      }
+// Emission G
+      if((r1<=SWK_N[Material][1][7][ie]) && j==0){
+         finalenergy=superparticle_energy-HIV[2]+EMIN[Material][1]-EMIN[Material][2];
+         if(finalenergy<=0.) return;
+//         if(finalenergy>DIME*DE) finalenergy=BKTQ;
+         IV=2;
+         j=1;
+         SC[1][7] += 1;
+// determination of the final states
+       if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
+       if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
+       cs = 1.-2.*rnd();
+       sn = sqrt(1.-cs*cs);
+       fai = 2.*PI*rnd();
+       KX = kf*cs;
+       KY = kf*sn*cos(fai);
+       KZ = kf*sn*sin(fai);
+       return;
+      }
+// Absorption G
+      if((r1<=SWK_N[Material][1][8][ie]) && j==0){
+         finalenergy=superparticle_energy+HIV[2]+EMIN[Material][1]-EMIN[Material][2];
+         if(finalenergy<=0.) return;
+//         if(finalenergy>DIME*DE) finalenergy=BKTQ;
+         IV=2;
+         j=1;
+         SC[1][8] += 1;
+// determination of the final states
+       if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
+       if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
+       cs = 1.-2.*rnd();
+       sn = sqrt(1.-cs*cs);
+       fai = 2.*PI*rnd();
+       KX = kf*cs;
+       KY = kf*sn*cos(fai);
+       KZ = kf*sn*sin(fai);
+       return;
+      }
+// Emission Δ
+      if((r1<=SWK_N[Material][1][9][ie]) && j==0){
+         finalenergy=superparticle_energy-HIV[3]+EMIN[Material][1]-EMIN[Material][3];
+         if(finalenergy<=0.) return;
+//         if(finalenergy>DIME*DE) finalenergy=BKTQ;
+         IV=3;
+         j=1;
+         SC[1][9] += 1;
+// determination of the final states
+       if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
+       if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
+       cs = 1.-2.*rnd();
+       sn = sqrt(1.-cs*cs);
+       fai = 2.*PI*rnd();
+       KX = kf*cs;
+       KY = kf*sn*cos(fai);
+       KZ = kf*sn*sin(fai);
+       return;
+      }
+// Absorption Δ
+      if((r1<=SWK_N[Material][1][10][ie]) && j==0){
+         finalenergy=superparticle_energy+HIV[3]+EMIN[Material][1]-EMIN[Material][3];
+         if(finalenergy<=0.) return;
+//         if(finalenergy>DIME*DE) finalenergy=BKTQ;
+         IV=3;
+         j=1;
+         SC[1][10] += 1;
+// determination of the final states
+       if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
+       if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
+       cs = 1.-2.*rnd();
+       sn = sqrt(1.-cs*cs);
+       fai = 2.*PI*rnd();
+       KX = kf*cs;
+       KY = kf*sn*cos(fai);
+       KZ = kf*sn*sin(fai);
+       return;
+      }
+// Acoustic phonon
+    if((r1<=SWK_N[Material][1][11][ie]) && j==0){
+       finalenergy=superparticle_energy;
+//       if(finalenergy<0.) return;
+       finalk=sqrt(ksquared);
+       j=1;
+       SC[1][11] += 1;
+// determination of the final states
+       if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
+       if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
+       cs = 1.-2.*rnd();
+       sn = sqrt(1.-cs*cs);
+       fai = 2.*PI*rnd();
+       KX = kf*cs;
+       KY = kf*sn*cos(fai);
+       KZ = kf*sn*sin(fai);
+       return;
+    }
+// Impurity scattering
+    if((r1<=SWK_N[Material][1][12][ie]) && j==0){
+     finalenergy=superparticle_energy;
+     SC[1][12] += 1;
+//     if(finalenergy<0.) return;
+     r2=rnd();
+     cb=1.-r2/(0.5+(1.-r2)*ksquared/QD2);
+     kf=ki;
+// linea 30 -- determination of the final states
+     sb=sqrt(1.-cb*cb);
+     fai=2.*PI*rnd();
+     cf=cos(fai);
+     sf=sin(fai);
+     skk=sqrt(KX*KX+KY*KY);
+     a11=KY/skk;
+     a12=KX*KZ/skk/ki;
+     a13=KX/ki;
+     a21=-KX/skk;
+     a22=KY*KZ/skk/ki;
+     a23=KY/ki;
+     a32=-skk/ki;
+     a33=KZ/ki;
+     x1=kf*sb*cf;
+     x2=kf*sb*sf;
+     x3=kf*cb;
+     KX=a11*x1+a12*x2+a13*x3;
+     KY=a21*x1+a22*x2+a23*x3;
+     KZ=a32*x2+a33*x3;
+     return;
+    }
+    if((finalenergy<=0.) || j==0) return;
+   }
+// Selection of scattering process in the Gamma-Valley
+// ===================================================
+  if(IV==2){
+    r1 = rnd();
+// Emission L
+      if((r1<=SWK_N[Material][1][1][ie]) && j==0){
+         finalenergy=superparticle_energy-HIV[2]+EMIN[Material][2]-EMIN[Material][1];
+         if(finalenergy<=0.) return;
+//         if(finalenergy>DIME*DE) finalenergy=BKTQ;
+         IV=1;
+         j=1;
+         SC[2][1] += 1;
+// determination of the final states
+       if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
+       if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
+       cs = 1.-2.*rnd();
+       sn = sqrt(1.-cs*cs);
+       fai = 2.*PI*rnd();
+       KX = kf*cs;
+       KY = kf*sn*cos(fai);
+       KZ = kf*sn*sin(fai);
+       return;
+      }
+// Absorption L
+      if((r1<=SWK_N[Material][1][2][ie]) && j==0){
+         finalenergy=superparticle_energy+HIV[2]+EMIN[Material][2]-EMIN[Material][1];
+         if(finalenergy<=0.) return;
+//         if(finalenergy>DIME*DE) finalenergy=BKTQ;
+         IV=1;
+         j=1;
+         SC[2][2] += 1;
+// determination of the final states
+       if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
+       if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
+       cs = 1.-2.*rnd();
+       sn = sqrt(1.-cs*cs);
+       fai = 2.*PI*rnd();
+       KX = kf*cs;
+       KY = kf*sn*cos(fai);
+       KZ = kf*sn*sin(fai);
+       return;
+      }
+// Emission Δ
+      if((r1<=SWK_N[Material][1][3][ie]) && j==0){
+         finalenergy=superparticle_energy-HIV[6]+EMIN[Material][2]-EMIN[Material][3];
+         if(finalenergy<=0.) return;
+//         if(finalenergy>DIME*DE) finalenergy=BKTQ;
+         IV=3;
+         j=1;
+         SC[2][3] += 1;
+// determination of the final states
+       if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
+       if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
+       cs = 1.-2.*rnd();
+       sn = sqrt(1.-cs*cs);
+       fai = 2.*PI*rnd();
+       KX = kf*cs;
+       KY = kf*sn*cos(fai);
+       KZ = kf*sn*sin(fai);
+       return;
+      }
+// Absorption Δ
+      if((r1<=SWK_N[Material][1][4][ie]) && j==0){
+         finalenergy=superparticle_energy+HIV[6]+EMIN[Material][2]-EMIN[Material][3];
+         if(finalenergy<=0.) return;
+//         if(finalenergy>DIME*DE) finalenergy=BKTQ;
+         IV=3;
+         j=1;
+         SC[2][4] += 1;
+// determination of the final states
+       if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
+       if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
+       cs = 1.-2.*rnd();
+       sn = sqrt(1.-cs*cs);
+       fai = 2.*PI*rnd();
+       KX = kf*cs;
+       KY = kf*sn*cos(fai);
+       KZ = kf*sn*sin(fai);
+       return;
+      }
+// Acoustic phonon emission
+    if((r1<=SWK_N[Material][2][5][ie]) && j==0){
+       finalenergy=superparticle_energy;
+       finalk=sqrt(ksquared);
+       j=1;
+       SC[2][5] += 1;
+// determination of the final states
+       if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
+       if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
+       cs = 1.-2.*rnd();
+       sn = sqrt(1.-cs*cs);
+       fai = 2.*PI*rnd();
+       KX = kf*cs;
+       KY = kf*sn*cos(fai);
+       KZ = kf*sn*sin(fai);
+       return;
+    }
+// Impurity scattering
+    if((r1<=SWK_N[Material][2][6][ie]) && j==0){
+     finalenergy=superparticle_energy;
+     SC[2][6] += 1;
+     r2=rnd();
+     cb=1.-r2/(0.5+(1.-r2)*ksquared/QD2);
+     kf=ki;
+// linea 30 -- determination of the final states
+     sb=sqrt(1.-cb*cb);
+     fai=2.*PI*rnd();
+     cf=cos(fai);
+     sf=sin(fai);
+     skk=sqrt(KX*KX+KY*KY);
+     a11=KY/skk;
+     a12=KX*KZ/skk/ki;
+     a13=KX/ki;
+     a21=-KX/skk;
+     a22=KY*KZ/skk/ki;
+     a23=KY/ki;
+     a32=-skk/ki;
+     a33=KZ/ki;
+     x1=kf*sb*cf;
+     x2=kf*sb*sf;
+     x3=kf*cb;
+     KX=a11*x1+a12*x2+a13*x3;
+     KY=a21*x1+a22*x2+a23*x3;
+     KZ=a32*x2+a33*x3;
+     return;     
+    }
+    if((finalenergy<=0.) || j==0) return;
+   }
+
+// Selection of scattering process in the Delta-Valley
+// ===================================================
+  if(IV==3){
+    r1 = rnd();
+// Emission L
+    if((r1<=SWK_N[Material][3][1][ie]) && j==0){
+       finalenergy=superparticle_energy-HIV[3]+EMIN[Material][3]-EMIN[Material][1];
+       if(finalenergy<=0.) return;
+       IV=1;
+       j=1;
+       SC[3][1] += 1;
+// determination of the final states
+       if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
+       if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
+       cs = 1.-2.*rnd();
+       sn = sqrt(1.-cs*cs);
+       fai = 2.*PI*rnd();
+       KX = kf*cs;
+       KY = kf*sn*cos(fai);
+       KZ = kf*sn*sin(fai);
+       return;
+    }
+// Absorbation L
+    if((r1<=SWK_N[Material][3][2][ie]) && j==0){
+       finalenergy=superparticle_energy+HIV[3]+EMIN[Material][3]-EMIN[Material][1];
+       if(finalenergy<=0.) return;
+       IV=1;
+       j=1;
+       SC[3][2] += 1;
+// determination of the final states
+       if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
+       if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
+       cs = 1.-2.*rnd();
+       sn = sqrt(1.-cs*cs);
+       fai = 2.*PI*rnd();
+       KX = kf*cs;
+       KY = kf*sn*cos(fai);
+       KZ = kf*sn*sin(fai);
+       return;
+    }
+// Emission Γ
+    if((r1<=SWK_N[Material][3][3][ie]) && j==0){
+       finalenergy=superparticle_energy-HIV[6]+EMIN[Material][3]-EMIN[Material][2];
+       if(finalenergy<=0.) return;
+       IV=2;
+       j=1;
+       SC[3][3] += 1;
+// determination of the final states
+       if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
+       if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
+       cs = 1.-2.*rnd();
+       sn = sqrt(1.-cs*cs);
+       fai = 2.*PI*rnd();
+       KX = kf*cs;
+       KY = kf*sn*cos(fai);
+       KZ = kf*sn*sin(fai);
+       return;
+    }
+// Absorbation Γ
+    if((r1<=SWK_N[Material][3][4][ie]) && j==0){
+       finalenergy=superparticle_energy+HIV[6]+EMIN[Material][3]-EMIN[Material][2];
+       if(finalenergy<=0.) return;
+       j=1;
+       SC[3][4] += 1;
+// determination of the final states
+       if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
+       if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
+       cs = 1.-2.*rnd();
+       sn = sqrt(1.-cs*cs);
+       fai = 2.*PI*rnd();
+       KX = kf*cs;
+       KY = kf*sn*cos(fai);
+       KZ = kf*sn*sin(fai);
+       return;
+    }
+// Emission Δ(1)
+    if((r1<=SWK_N[Material][3][5][ie]) && j==0){
+       finalenergy=superparticle_energy-HIV[4];
+       if(finalenergy<=0.) return;
+       j=1;
+       SC[3][5] += 1;
+// determination of the final states
+       if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
+       if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
+       cs = 1.-2.*rnd();
+       sn = sqrt(1.-cs*cs);
+       fai = 2.*PI*rnd();
+       KX = kf*cs;
+       KY = kf*sn*cos(fai);
+       KZ = kf*sn*sin(fai);
+       return;
+    }
+// Absorbation Δ(1)
+    if((r1<=SWK_N[Material][3][6][ie]) && j==0){
+       finalenergy=superparticle_energy+HIV[4];
+       if(finalenergy<=0.) return;
+       j=1;
+       SC[3][6] += 1;
+// determination of the final states
+       if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
+       if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
+       cs = 1.-2.*rnd();
+       sn = sqrt(1.-cs*cs);
+       fai = 2.*PI*rnd();
+       KX = kf*cs;
+       KY = kf*sn*cos(fai);
+       KZ = kf*sn*sin(fai);
+       return;
+    }
+// Emission Δ(2)
+    if((r1<=SWK_N[Material][3][7][ie]) && j==0){
+       finalenergy=superparticle_energy-HIV[5];
+       if(finalenergy<=0.) return;
+       j=1;
+       SC[3][7] += 1;
+// determination of the final states
+       if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
+       if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
+       cs = 1.-2.*rnd();
+       sn = sqrt(1.-cs*cs);
+       fai = 2.*PI*rnd();
+       KX = kf*cs;
+       KY = kf*sn*cos(fai);
+       KZ = kf*sn*sin(fai);
+       return;
+    }
+// Absorbation Δ(2)
+    if((r1<=SWK_N[Material][3][8][ie]) && j==0){
+       finalenergy=superparticle_energy+HIV[5];
+       if(finalenergy<=0.) return;
+       j=1;
+       SC[3][8] += 1;
+// determination of the final states
+       if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
+       if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
+       cs = 1.-2.*rnd();
+       sn = sqrt(1.-cs*cs);
+       fai = 2.*PI*rnd();
+       KX = kf*cs;
+       KY = kf*sn*cos(fai);
+       KZ = kf*sn*sin(fai);
+       return;
+    }
+// Acoustic phonon emission
+    if((r1<=SWK_N[Material][3][9][ie]) && j==0){
+       finalenergy=superparticle_energy;
+       finalk=sqrt(ksquared);
+       j=1;
+       SC[3][9] += 1;
+// determination of the final states
+       if(CONDUCTION_BAND==KANE) kf = SMH[Material][IV]*sqrt(finalenergy*(1.+alphaK[Material][IV]*finalenergy));
+       if(CONDUCTION_BAND==PARABOLIC) kf=SMH[Material][IV]*sqrt(finalenergy);
+       cs = 1.-2.*rnd();
+       sn = sqrt(1.-cs*cs);
+       fai = 2.*PI*rnd();
+       KX = kf*cs;
+       KY = kf*sn*cos(fai);
+       KZ = kf*sn*sin(fai);
+       return;
+    }
+// Impurity scattering
+    if((r1<=SWK_N[Material][3][10][ie]) && j==0){
+     finalenergy=superparticle_energy;
+     SC[3][10] += 1;
+     r2=rnd();
+     cb=1.-r2/(0.5+(1.-r2)*ksquared/QD2);
+     kf=ki;
+// linea 30 -- determination of the final states
+     sb=sqrt(1.-cb*cb);
+     fai=2.*PI*rnd();
+     cf=cos(fai);
+     sf=sin(fai);
+     skk=sqrt(KX*KX+KY*KY);
+     a11=KY/skk;
+     a12=KX*KZ/skk/ki;
+     a13=KX/ki;
+     a21=-KX/skk;
+     a22=KY*KZ/skk/ki;
+     a23=KY/ki;
+     a32=-skk/ki;
+     a33=KZ/ki;
+     x1=kf*sb*cf;
+     x2=kf*sb*sf;
+     x3=kf*cb;
+     KX=a11*x1+a12*x2+a13*x3;
+     KY=a21*x1+a22*x2+a23*x3;
+     KZ=a32*x2+a33*x3;
+     return;     
+    }
+    if((finalenergy<=0.) || j==0) return;
+   }
   }
+ }
 }
 
 // ===============================================
