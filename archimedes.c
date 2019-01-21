@@ -64,7 +64,7 @@
 #define POISSONITMAX 1500
 #define SMALL 1.e-5
 #define VMAX 1000000
-#define NPMAX 10000000 // maximum number of super-particles
+#define NPMAX 15000000 // maximum number of super-particles
 #define MCE 0  // MCE stands for MC for electrons only
 #define MCH 1  // MCH stands for MC for holes only
 #define MCEH 2 // MCEH stands for MC both for electrons and holes
