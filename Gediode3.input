@@ -10,10 +10,10 @@ TRANSPORT MC ELECTRONS
 FINALTIME 1.0e-12
 TIMESTEP 0.0001e-12
 
-XLENGTH 100.0e-9
+XLENGTH 140.0e-9
 YLENGTH 3.0e-9
 
-XSPATIALSTEP 100
+XSPATIALSTEP 140
 YSPATIALSTEP 30
 
 # Phonons scattering
@@ -22,25 +22,25 @@ OPTICALSCATTERING ON
 
 CONDUCTIONBAND PARABOLIC
 
-UNDOPE 1.e22  30.0e-9  70.0e-9
+UNDOPE 1.e22  50.0e-9  90.0e-9
 NPLUS  1.e24
 
 # definition of the material (all the device is made of Silicon)
-MATERIAL X 0.0 100.0e-9    Y 0.0 3.0e-9  GERMANIUM
+MATERIAL X 0.0 140.0e-9    Y 0.0 3.0e-9  GERMANIUM
 
 # Definition of the doping concentration
 # ======================================
-DONORDENSITY    0.0       0.0    100.0e-9    3.0e-9    1.e22
-DONORDENSITY    0.0       0.0    30.0e-9     3.0e-9    1.e24
-DONORDENSITY    70.0e-9   0.0    100.0e-9    3.0e-9    1.e24
-ACCEPTORDENSITY 0.0       0.0    100.0e-9    3.0e-9    1.e20
+DONORDENSITY    0.0       0.0    140.0e-9    3.0e-9    1.e22
+DONORDENSITY    0.0       0.0    50.0e-9     3.0e-9    1.e24
+DONORDENSITY    90.0e-9   0.0    140.0e-9    3.0e-9    1.e24
+ACCEPTORDENSITY 0.0       0.0    140.0e-9    3.0e-9    1.e20
 
 # Definition of the various contacts
 # ==================================
 CONTACT LEFT  0.0    3.0e-9 OHMIC     0.0     1.e24
 CONTACT RIGHT 0.0    3.0e-9 OHMIC     0.5     1.e24
-CONTACT UP    0.0    100.0e-9 INSULATOR 0.0
-CONTACT DOWN  0.0    100.0e-9 INSULATOR 0.0
+CONTACT UP    0.0    140.0e-9 INSULATOR 0.0
+CONTACT DOWN  0.0    140.0e-9 INSULATOR 0.0
 
 # Quantum effective potential
 # ===========================
