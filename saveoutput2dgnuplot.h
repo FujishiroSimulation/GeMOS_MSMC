@@ -502,7 +502,7 @@ SaveOutput2DGNUPLOT(int je)
   fprintf(su,"Efield:xvelocity(for140nm,N+:50nm,undope:40nm) %g %g\n",SE/float(count),SV/float(count));
   
   //ocupancy in chanel
-  fprintf(su,"ocupancy in chanel L:G:X %g %g %g\n",SCL,SCG,SCX);
+  fprintf(su,"ocupancy in chanel L:G:X %d %d %d\n",SCL,SCG,SCX);
 
 // Closure of output files
 // =======================
