@@ -305,8 +305,8 @@ SaveOutput2DGNUPLOT(int je)
   
   // occupancy
 // =========
-  int CL, CG, CX, CT;
-  float OL, OG, OX,SCL,SCG,SCX;
+  int CL, CG, CX, CT,SCL,SCG,SCX;
+  float OL, OG, OX;
   for (j=0; j<=nx-1; j++){
     CL=0;
     CG=0;
