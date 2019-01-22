@@ -307,6 +307,7 @@ SaveOutput2DGNUPLOT(int je)
 // =========
   int CL, CG, CX, CT,SCL,SCG,SCX;
   float OL, OG, OX;
+  SCL=SCG=SCX=0;
   for (j=0; j<=nx-1; j++){
     CL=0;
     CG=0;
@@ -315,24 +316,23 @@ SaveOutput2DGNUPLOT(int je)
     OL=0;
     OG=0;
     OX=0;
-    SCL=SCG=SCX=0;
     for(i=1; i<=INUM; i++){
       if(int(P[i][5]/dx) == j){
         if(P[i][0] == 1){
           CL++;
-          if(P[i][5]>=undope_INI && P[i][5]<=undope_FIN){
+          if(j>=int(undope_INI/dx) && j<=int(undope_FIN/dx)){
             SCL++;
           }
         }
         else if(P[i][0] == 2){
           CG++;
-          if(P[i][5]>=undope_INI && P[i][5]<=undope_FIN){
+          if(j>=int(undope_INI/dx) && j<=int(undope_FIN/dx)){
             SCG++;
           }
         }
         else if(P[i][0] == 3){
           CX++;
-          if(P[i][5]>=undope_INI && P[i][5]<=undope_FIN){
+          if(j>=int(undope_INI/dx) && j<=int(undope_FIN/dx)){
             SCX++;
           }
         }
@@ -500,6 +500,20 @@ count = 0;
     }
   }
   fprintf(su,"Efield:xvelocity(for140nm,N+:50nm,undope:40nm) %g %g\n",SE/float(count),SV/float(count));
+  
+  count = 0;
+  SE = 0.0;
+  SV = 0.0;
+  for(j=1;j<=ny+1;j++){
+    for(i=1;i<=nx+1;i++){
+      if(i >= 46 && i <= 86){
+        SE = SE + E[i][j][0];
+        SV = SV + u2d[i][j][2]/MEDIA;
+        count++;
+      }
+    }
+  }
+  fprintf(su,"Efield:xvelocity(for120nm,N+:45nm,undope:40nm) %g %g\n",SE/float(count),SV/float(count));
   
   //ocupancy in chanel
   fprintf(su,"ocupancy in chanel L:G:X %d %d %d\n",SCL,SCG,SCX);
