@@ -513,7 +513,21 @@ count = 0;
       }
     }
   }
-  fprintf(su,"Efield:xvelocity(for120nm,N+:45nm,undope:40nm) %g %g\n",SE/float(count),SV/float(count));
+  fprintf(su,"Efield:xvelocity(for130nm,N+:45nm,undope:40nm) %g %g\n",SE/float(count),SV/float(count));
+ 
+ count = 0;
+  SE = 0.0;
+  SV = 0.0;
+  for(j=1;j<=ny+1;j++){
+    for(i=1;i<=nx+1;i++){
+      if(i >= 41 && i <= 81){
+        SE = SE + E[i][j][0];
+        SV = SV + u2d[i][j][2]/MEDIA;
+        count++;
+      }
+    }
+  }
+  fprintf(su,"Efield:xvelocity(for120nm,N+:40nm,undope:40nm) %g %g\n",SE/float(count),SV/float(count));
   
   //ocupancy in chanel
   fprintf(su,"ocupancy in chanel L:G:X %d %d %d\n",SCL,SCG,SCX);
